@@ -1,5 +1,6 @@
 package com.thunderbolt.android.vista;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -59,6 +60,11 @@ public class UsuariosActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()){
+            case R.id.btnNuevoUsuario:
+                Intent intent= new Intent(this,CrearUsuarioActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }
