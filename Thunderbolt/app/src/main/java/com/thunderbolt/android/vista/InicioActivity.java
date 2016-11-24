@@ -86,7 +86,6 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setHomeAsUpIndicator(R.drawable.icono_atras);
             ab.setTitle("Proyectos");
             ab.setDisplayHomeAsUpEnabled(true);
         }
