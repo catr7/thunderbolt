@@ -5,4 +5,18 @@ package com.db.android.constantes;
  */
 
 public enum Estatus {
+
+    EN_PROCESO("en proceso"),
+    CULMINADO("Culminado");
+
+    private final String descripcion;
+
+    Estatus(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getdescripcion() {
+        return descripcion;
+    }
+
 }
