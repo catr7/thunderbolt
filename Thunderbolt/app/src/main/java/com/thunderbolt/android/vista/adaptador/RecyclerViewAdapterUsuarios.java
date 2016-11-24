@@ -47,7 +47,7 @@ public class RecyclerViewAdapterUsuarios extends RecyclerView.Adapter<ViewHolder
                    //aca se puede colocar un dialogo para elimar
                     } else {
                     Intent intent= new Intent(context, CrearProyectoActivity.class);
-                    intent.putExtra("correo",usuarios.get(position).getCorreo());
+                    intent.putExtra("usuario",usuarios.get(position));
                     context.startActivity(intent);
                     }
             }

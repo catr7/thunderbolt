@@ -9,21 +9,24 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.db.android.model.Usuario;
 import com.thunderbolt.android.R;
 
 public class CrearProyectoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton imgBBuscarUsuario;
     private TextView txtVUsuarioSeleccionado;
+    private Usuario usuarioSeleccionado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_proyecto);
         setToolbar();
         Intent intent = getIntent(); // gets the previously created intent
-        if(intent.getStringExtra("correo")!=null) {
+        if(intent.getExtras()!=null && intent.getExtras().getSerializable("usuario")!=null) {
             txtVUsuarioSeleccionado= (TextView) findViewById(R.id.txtVUsuarioSeleccionado);
-            txtVUsuarioSeleccionado.setText(intent.getStringExtra("correo"));
+            usuarioSeleccionado= (Usuario) intent.getExtras().getSerializable("usuario");
+            txtVUsuarioSeleccionado.setText(usuarioSeleccionado.getCorreo());
         }
         imgBBuscarUsuario = (ImageButton) findViewById(R.id.imgBBuscarUsuario);
         imgBBuscarUsuario.setOnClickListener(this);
