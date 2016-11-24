@@ -7,6 +7,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +38,12 @@ public class ProyectoFacade implements ProyectoFacadeLocal {
         DBHelper dbHelper= new DBHelper(ContextProvider.getContext());
         dao = dbHelper.getProyectoDao();
         QueryBuilder queryBuilder = dao.queryBuilder();
-        return (List<Proyecto>) queryBuilder.query();
+        if(queryBuilder.query()!=null){
+            return (List<Proyecto>) queryBuilder.query();
+        }else{
+            List<Proyecto> proyectos = new ArrayList<>();
+            return proyectos;
+        }
+
     }
 }
