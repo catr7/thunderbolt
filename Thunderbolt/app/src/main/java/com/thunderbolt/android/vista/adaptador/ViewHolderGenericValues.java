@@ -24,6 +24,5 @@ public class ViewHolderGenericValues extends RecyclerView.ViewHolder {
         valorEnum= (TextView) itemView.findViewById(R.id.textViewValorEnum);
         descripcionEnum =(TextView) itemView.findViewById(R.id.textViewDescripcionEnum);
     }
-
 }
 
