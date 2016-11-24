@@ -13,5 +13,5 @@ public interface ProyectoFacadeLocal {
 
     void crear(Proyecto proyecto) throws SQLException;
     Proyecto buscarPorId(Long id) throws SQLException;
-    List<Proyecto> busarProyectos() throws SQLException;
+    List<Proyecto> buscarProyectos() throws SQLException;
 }

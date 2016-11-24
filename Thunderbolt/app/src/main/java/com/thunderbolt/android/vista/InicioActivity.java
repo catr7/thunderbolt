@@ -37,7 +37,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         List<Proyecto> proyectos= new ArrayList<>();
         ProyectoFacadeLocal proyectoFacadeLocal = new ProyectoFacade();
         try {
-            proyectos.addAll(proyectoFacadeLocal.busarProyectos());
+            proyectos.addAll(proyectoFacadeLocal.buscarProyectos());
         } catch (SQLException e) {
             e.printStackTrace();
         }

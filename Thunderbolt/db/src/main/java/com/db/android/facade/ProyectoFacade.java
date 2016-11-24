@@ -33,7 +33,7 @@ public class ProyectoFacade implements ProyectoFacadeLocal {
     }
 
     @Override
-    public List<Proyecto> busarProyectos() throws SQLException {
+    public List<Proyecto> buscarProyectos() throws SQLException {
         Dao dao = null;
         DBHelper dbHelper= new DBHelper(ContextProvider.getContext());
         dao = dbHelper.getProyectoDao();
