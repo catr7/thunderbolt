@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vista.CrearProyecto" />
+        <activity android:name=".vista.CrearProyectoActivity" />
         <activity
             android:name=".vista.UsuariosActivity"
             android:label="@string/title_activity_usuarios"

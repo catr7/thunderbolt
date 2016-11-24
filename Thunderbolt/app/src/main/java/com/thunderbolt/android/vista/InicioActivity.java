@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import com.db.android.facade.ProyectoFacade;
 import com.db.android.facade.ProyectoFacadeLocal;
 import com.db.android.model.Proyecto;
-import com.db.android.model.Usuario;
 import com.thunderbolt.android.R;
 import com.thunderbolt.android.vista.adaptador.RecyclerViewAdapterProyectos;
 
@@ -75,7 +74,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnNuevoProyecto:
-                Intent intent= new Intent(this,CrearProyecto.class);
+                Intent intent= new Intent(this,CrearProyectoActivity.class);
                 startActivity(intent);
                 break;
         }

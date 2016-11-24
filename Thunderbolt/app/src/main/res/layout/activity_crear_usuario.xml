@@ -7,31 +7,93 @@
     tools:context="com.thunderbolt.android.vista.CrearUsuarioActivity">
 
 
-
     <LinearLayout
-        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_width="match_parent">
+        android:layout_alignParentRight="true"
+        android:orientation="vertical">
 
 
         <include layout="@layout/toolbar" />
 
-
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></LinearLayout>
-
         <TextView
-            android:text="TextView"
+            android:id="@+id/textViewnombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView7" />
+            android:ems="10"
+            android:text="Nombre" />
+
+        <EditText
+            android:id="@+id/TxtENombreUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"/>
+
+
+        <TextView
+            android:id="@+id/textViewapellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="Apellido: " />
+
+        <EditText
+            android:id="@+id/TextEApellidoUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/textViewcorrep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="Correo: " />
+
+        <EditText
+            android:id="@+id/TextECorreoUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"/>
+
+        <TextView
+            android:id="@+id/textViewdireccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="Direccion: " />
+
+        <EditText
+            android:id="@+id/TextEDireccionUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textMultiLine" />
+
+            <TextView
+                android:id="@+id/textViewtelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text="Telefono: " />
+
+            <EditText
+                android:id="@+id/TextETelefonoUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text|phone" />
+        <Button
+            android:text="Crear Usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/btnCrearUsuario" />
+
 
     </LinearLayout>
-
-
-</RelativeLayout>
+    </RelativeLayout>
