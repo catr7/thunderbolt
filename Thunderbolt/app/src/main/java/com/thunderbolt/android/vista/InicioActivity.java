@@ -1,5 +1,6 @@
 package com.thunderbolt.android.vista;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -34,38 +35,16 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         setToolbar();
         recyclerView = (RecyclerView) findViewById(R.id.listaProyectos);
         List<Proyecto> proyectos= new ArrayList<>();
-
-
-        Usuario usuario = new Usuario();
-        usuario.setNombre("Carlos");
-        usuario.setCorreo("carlosandrestorres30@gmail.com");
-        usuario.setDireccion("Av la mata");
-        usuario.setTelefono("04145206979");
-
-        Proyecto proyecto= new Proyecto();
-        proyecto.setEstado("Lara");
-        proyecto.setNombreEstructura("Edificio");
-        proyecto.setPais("Venezuela");
-        proyecto.setUsuario(usuario);
-
         ProyectoFacadeLocal proyectoFacadeLocal = new ProyectoFacade();
-
         try {
-            proyectoFacadeLocal.crear(proyecto);
             proyectos.addAll(proyectoFacadeLocal.busarProyectos());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
         RecyclerViewAdapterProyectos adaptador = new RecyclerViewAdapterProyectos(proyectos);
         manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adaptador);
-
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.btnNuevoProyecto);
         fab.setOnClickListener(this);
     }
@@ -96,6 +75,8 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnNuevoProyecto:
+                Intent intent= new Intent(this,CrearProyecto.class);
+                startActivity(intent);
                 break;
         }
     }
