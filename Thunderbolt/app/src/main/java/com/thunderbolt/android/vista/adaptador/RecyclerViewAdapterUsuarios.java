@@ -21,7 +21,6 @@ import java.util.List;
 
 public class RecyclerViewAdapterUsuarios extends RecyclerView.Adapter<ViewHolderUsuario> {
     private List<Usuario> usuarios;
-
     public RecyclerViewAdapterUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }

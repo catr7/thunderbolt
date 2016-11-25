@@ -11,8 +11,9 @@ import com.thunderbolt.android.R;
 /**
  * Created by conamerica36 on 23/10/16.
  */
-public class ViewHolderProyecto extends RecyclerView.ViewHolder{
+public class ViewHolderProyecto extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
+    private ItemClickListener clickListener;
     CardView cv;
     TextView nombreEstructura;
     TextView estado;
@@ -26,5 +27,22 @@ public class ViewHolderProyecto extends RecyclerView.ViewHolder{
         nombreEstructura = (TextView) itemView.findViewById(R.id.txtVnombreEstructura);
         estado= (TextView)itemView.findViewById(R.id.txtVnombreEstado);
         usuario= (TextView)itemView.findViewById(R.id.txtVnombreCorreo);
+        itemView.setOnClickListener(this);
+        itemView.setOnLongClickListener(this);
+    }
+
+    public void setClickListener(ItemClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        clickListener.onClick(v, getPosition(), false);
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        clickListener.onClick(v, getPosition(), true);
+        return  true;
     }
 }

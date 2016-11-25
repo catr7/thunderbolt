@@ -53,13 +53,19 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         imgBBuscarUsuario.setOnClickListener(this);
         spinnerEstado.setAdapter(new ArrayAdapter<Estado>(this, android.R.layout.simple_spinner_item, Estado.values()));
         btnRealizarCalculos.setOnClickListener(this);
-
+        Intent intent = getIntent();
         if (proyectoNuevo == null) {
-            proyectoNuevo = new Proyecto();
-            proyectoNuevo.setFechaCreacion(new Date());
+            if (intent.getExtras() != null && intent.getExtras().getSerializable("proyecto") != null) {
+               proyectoNuevo= (Proyecto)intent.getExtras().getSerializable("proyecto");
+               nombreEstructura.setText(proyectoNuevo.getNombreEstructura());
+               pais.setText(proyectoNuevo.getPais());
+               direccion.setText(proyectoNuevo.getDireccion());
+               spinnerEstado.setSelection(proyectoNuevo.getEstado().ordinal());
+            } else {
+                proyectoNuevo = new Proyecto();
+                proyectoNuevo.setFechaCreacion(new Date());
+            }
         }
-        Intent intent = getIntent(); // gets the previously created intent
-
         if (intent.getExtras() != null && intent.getExtras().getSerializable("usuario") != null) {
             txtVUsuarioSeleccionado = (TextView) findViewById(R.id.txtVUsuario);
             usuarioSeleccionado = (Usuario) intent.getExtras().getSerializable("usuario");
