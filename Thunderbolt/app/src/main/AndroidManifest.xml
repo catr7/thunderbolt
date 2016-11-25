@@ -23,7 +23,8 @@
             android:name=".vista.UsuariosActivity"
             android:label="@string/title_activity_usuarios"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".vista.CrearUsuarioActivity"></activity>
+        <activity android:name=".vista.CrearUsuarioActivity" />
+        <activity android:name=".vista.RealizarCalculosActivity"></activity>
     </application>
 
 </manifest>

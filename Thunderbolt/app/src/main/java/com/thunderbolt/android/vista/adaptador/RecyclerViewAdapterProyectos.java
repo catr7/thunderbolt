@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.db.android.constantes.Estatus;
 import com.db.android.model.Proyecto;
 import com.thunderbolt.android.R;
 
@@ -30,8 +31,13 @@ public class RecyclerViewAdapterProyectos extends RecyclerView.Adapter<ViewHolde
 
     @Override
     public void onBindViewHolder(ViewHolderProyecto holder, int position) {
+        if(proyectos.get(position).getEstatus().equals(Estatus.CULMINADO)){
+            holder.estatus.setImageResource(R.mipmap.estatus_completo);
+        }else{
+            holder.estatus.setImageResource(R.mipmap.estatus_incompleto);
+        }
         holder.nombreEstructura.setText(proyectos.get(position).getNombreEstructura());
-        holder.estado.setText(proyectos.get(position).getEstado());
+        holder.estado.setText(proyectos.get(position).getEstado().getdescripcion());
         holder.usuario.setText(proyectos.get(position).getUsuario().getCorreo());
     }
 

@@ -1,5 +1,6 @@
 package com.db.android.model;
 
+import com.db.android.constantes.Estado;
 import com.db.android.constantes.Estatus;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
@@ -20,8 +21,8 @@ public class Proyecto implements Serializable {
     private String nombreEstructura;
     @DatabaseField
     private String pais;
-    @DatabaseField
-    private String estado;
+    @DatabaseField (dataType = DataType.ENUM_STRING)
+    private Estado estado;
     @DatabaseField
     private String direccion;
     @DatabaseField(foreign = true, foreignAutoCreate = true , foreignAutoRefresh = true, columnName = "fk_usuario")
@@ -38,7 +39,7 @@ public class Proyecto implements Serializable {
     public  Proyecto(){
     }
 
-    public Proyecto(Long id, String nombreEstructura, String pais, String estado, String direccion, Usuario usuario, Date fechaCreacion, Estatus estatus, NumeroEventosPeligorsos numeroEventosPeligorsos) {
+    public Proyecto(Long id, String nombreEstructura, String pais, Estado estado, String direccion, Usuario usuario, Date fechaCreacion, Estatus estatus, NumeroEventosPeligorsos numeroEventosPeligorsos) {
         this.id = id;
         this.nombreEstructura = nombreEstructura;
         this.pais = pais;
@@ -74,11 +75,11 @@ public class Proyecto implements Serializable {
         this.pais = pais;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 

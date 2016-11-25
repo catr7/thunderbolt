@@ -48,6 +48,7 @@ public class RecyclerViewAdapterUsuarios extends RecyclerView.Adapter<ViewHolder
                     } else {
                     Intent intent= new Intent(ContextProvider.getContext(), CrearProyectoActivity.class);
                     intent.putExtra("usuario",usuarios.get(position));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     ContextProvider.getContext().startActivity(intent);
                     }
             }

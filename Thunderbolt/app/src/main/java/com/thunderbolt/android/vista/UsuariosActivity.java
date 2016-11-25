@@ -67,4 +67,17 @@ public class UsuariosActivity extends AppCompatActivity implements View.OnClickL
                 break;
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        this.finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent= new Intent(this,CrearProyectoActivity.class);
+        startActivity(intent);
+    }
 }

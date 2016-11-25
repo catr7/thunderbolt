@@ -52,7 +52,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
+        return false;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            return false;
         }
 
         return super.onOptionsItemSelected(item);
@@ -76,6 +76,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btnNuevoProyecto:
                 Intent intent= new Intent(this,CrearProyectoActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }
@@ -86,7 +87,6 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setTitle("Proyectos");
-            ab.setDisplayHomeAsUpEnabled(true);
         }
     }
 }

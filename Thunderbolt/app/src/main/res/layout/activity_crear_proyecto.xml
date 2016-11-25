@@ -14,13 +14,14 @@
         android:layout_alignParentRight="true"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/include"
-            layout="@layout/toolbar" />
+        <include layout="@layout/toolbar" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:scrollbars="vertical"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:orientation="horizontal">
@@ -31,29 +32,98 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/include"
                 android:layout_marginTop="15dp"
                 android:textSize="13dp"
-                android:layout_marginLeft="10dp"
                 android:text="Usuario" />
 
-            <TextView
-                android:id="@+id/txtVUsuarioSeleccionado"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/include"
-                android:textSize="13dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"/>
-
-            <ImageButton
+            <android.support.design.widget.FloatingActionButton
                 android:id="@+id/imgBBuscarUsuario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                app:srcCompat="@android:drawable/ic_menu_search" />
+                android:layout_marginTop="-16dp"
+                app:srcCompat="@android:drawable/ic_menu_search"
+                app:backgroundTint="?attr/colorBackgroundFloating" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="Datos del Proyecto"
+                android:textSize="18dp"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView7" />
+
+
+            <TextView
+                android:text="Nombre de La Estructura: "
+                android:textSize="13dp"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView1" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:ems="10"
+                android:id="@+id/TextENombreEstructuraProyecto" />
+            <TextView
+                android:text="Pais: "
+                android:textSize="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:text="Venezuela"
+                android:enabled="false"
+                android:ems="10"
+                android:id="@+id/TextEPaisProyecto" />
+
+            <TextView
+                android:text="Estado: "
+                android:textSize="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerEstado" />
+
+            <TextView
+                android:text="Dirección: "
+                android:textSize="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/TextEDireccionProyecto" />
+
+            <Button
+                android:text="Realizar Calculos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/btnRealizarCalculos" />
+
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
