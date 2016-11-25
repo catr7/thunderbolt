@@ -75,6 +75,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()){
             case R.id.btnNuevoProyecto:
                 Intent intent= new Intent(this,CrearProyectoActivity.class);
+                intent.putExtra("accion","crear");
                 startActivity(intent);
                 finish();
                 break;

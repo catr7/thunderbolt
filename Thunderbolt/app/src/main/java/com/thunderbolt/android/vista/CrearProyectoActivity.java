@@ -41,37 +41,41 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_proyecto);
-        setToolbar();
-
+        Intent intent = getIntent();
         nombreEstructura = (EditText) findViewById(R.id.TextENombreEstructuraProyecto);
         pais = (EditText) findViewById(R.id.TextEPaisProyecto);
         direccion = (EditText) findViewById(R.id.TextEDireccionProyecto);
         imgBBuscarUsuario = (ImageButton) findViewById(R.id.imgBBuscarUsuario);
         spinnerEstado = (Spinner) findViewById(R.id.spinnerEstado);
         btnRealizarCalculos = (Button) findViewById(R.id.btnRealizarCalculos);
+        txtVUsuarioSeleccionado = (TextView) findViewById(R.id.txtVUsuario);
 
         imgBBuscarUsuario.setOnClickListener(this);
         spinnerEstado.setAdapter(new ArrayAdapter<Estado>(this, android.R.layout.simple_spinner_item, Estado.values()));
         btnRealizarCalculos.setOnClickListener(this);
-        Intent intent = getIntent();
+
         if (proyectoNuevo == null) {
             if (intent.getExtras() != null && intent.getExtras().getSerializable("proyecto") != null) {
-               proyectoNuevo= (Proyecto)intent.getExtras().getSerializable("proyecto");
-               nombreEstructura.setText(proyectoNuevo.getNombreEstructura());
-               pais.setText(proyectoNuevo.getPais());
-               direccion.setText(proyectoNuevo.getDireccion());
-               spinnerEstado.setSelection(proyectoNuevo.getEstado().ordinal());
+                proyectoNuevo = (Proyecto) intent.getExtras().getSerializable("proyecto");
+                txtVUsuarioSeleccionado.setText(proyectoNuevo.getUsuario().getCorreo());
+                nombreEstructura.setText(proyectoNuevo.getNombreEstructura());
+                pais.setText(proyectoNuevo.getPais());
+                direccion.setText(proyectoNuevo.getDireccion());
+                spinnerEstado.setSelection(proyectoNuevo.getEstado().ordinal());
             } else {
                 proyectoNuevo = new Proyecto();
                 proyectoNuevo.setFechaCreacion(new Date());
             }
         }
+
+        setToolbar();
+
         if (intent.getExtras() != null && intent.getExtras().getSerializable("usuario") != null) {
-            txtVUsuarioSeleccionado = (TextView) findViewById(R.id.txtVUsuario);
             usuarioSeleccionado = (Usuario) intent.getExtras().getSerializable("usuario");
             proyectoNuevo.setUsuario(usuarioSeleccionado);
             txtVUsuarioSeleccionado.setText(usuarioSeleccionado.getCorreo());
         }
+
     }
 
     private void setToolbar() {
@@ -79,7 +83,13 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setTitle("Crear Proyecto");
+            if (proyectoNuevo.getEstatus()!=null) {
+                ab.setTitle("Proyecto");
+                btnRealizarCalculos.setText("Realizar Calculos");
+            } else {
+                ab.setTitle("Crear Proyecto");
+                btnRealizarCalculos.setText("Crear Proyecto");
+            }
             ab.setDisplayHomeAsUpEnabled(true);
         }
     }
@@ -104,19 +114,21 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
 
     public void irARealizarCalculos() {
         if (spinnerEstado.getSelectedItem() != "" && proyectoNuevo.getUsuario() != null) {
-            ProyectoFacadeLocal proyectoFacadeLocal= new ProyectoFacade();
-            try {
-                proyectoNuevo.setEstado((Estado) spinnerEstado.getSelectedItem());
-                proyectoNuevo.setNombreEstructura(nombreEstructura.getText().toString());
-                proyectoNuevo.setPais(pais.getText().toString());
-                proyectoNuevo.setDireccion(direccion.getText().toString());
-                proyectoNuevo.setEstatus(Estatus.EN_PROCESO);
-                proyectoFacadeLocal.crear(proyectoNuevo);
-            } catch (SQLException e) {
-                Toast.makeText(this, "Ocurrio un problema al crear el proyecto", Toast.LENGTH_SHORT).show();
+            ProyectoFacadeLocal proyectoFacadeLocal = new ProyectoFacade();
+            if(proyectoNuevo.getEstatus()==null) {
+                try {
+                    proyectoNuevo.setEstado((Estado) spinnerEstado.getSelectedItem());
+                    proyectoNuevo.setNombreEstructura(nombreEstructura.getText().toString());
+                    proyectoNuevo.setPais(pais.getText().toString());
+                    proyectoNuevo.setDireccion(direccion.getText().toString());
+                    proyectoNuevo.setEstatus(Estatus.EN_PROCESO);
+                    proyectoFacadeLocal.crear(proyectoNuevo);
+                } catch (SQLException e) {
+                    Toast.makeText(this, "Ocurrio un problema al crear el proyecto", Toast.LENGTH_SHORT).show();
+                }
             }
             Intent intentCalulos = new Intent(this, RealizarCalculosActivity.class);
-            intentCalulos.putExtra("proyecto",proyectoNuevo);
+            intentCalulos.putExtra("proyecto", proyectoNuevo);
             startActivity(intentCalulos);
             finish();
         } else {
@@ -127,7 +139,7 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent= new Intent(this,InicioActivity.class);
+        Intent intent = new Intent(this, InicioActivity.class);
         startActivity(intent);
     }
 
