@@ -38,7 +38,7 @@ public class UsuariosActivity extends AppCompatActivity implements View.OnClickL
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        RecyclerViewAdapterUsuarios adaptador = new RecyclerViewAdapterUsuarios(usuarios, this);
+        RecyclerViewAdapterUsuarios adaptador = new RecyclerViewAdapterUsuarios(usuarios);
         manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adaptador);
