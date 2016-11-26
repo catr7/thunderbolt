@@ -12,6 +12,7 @@ import com.base.android.ContextProvider;
 import com.db.android.model.Usuario;
 import com.thunderbolt.android.R;
 import com.thunderbolt.android.vista.CrearProyectoActivity;
+import com.thunderbolt.android.vista.CrearUsuarioActivity;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class RecyclerViewAdapterUsuarios extends RecyclerView.Adapter<ViewHolder
                 if (isLongClick) {
                    //aca se puede colocar un dialogo para elimar
                     } else {
-                    Intent intent= new Intent(ContextProvider.getContext(), CrearProyectoActivity.class);
+                    Intent intent= new Intent(ContextProvider.getContext(), CrearUsuarioActivity.class);
                     intent.putExtra("usuario",usuarios.get(position));
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     ContextProvider.getContext().startActivity(intent);

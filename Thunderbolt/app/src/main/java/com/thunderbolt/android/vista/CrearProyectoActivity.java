@@ -33,9 +33,9 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
     private Proyecto proyectoNuevo;
     private ImageButton imgBBuscarUsuario;
     private TextView txtVUsuarioSeleccionado;
-    private EditText nombreEstructura;
-    private EditText pais;
-    private EditText direccion;
+    private EditText txtENombreEstructura;
+    private EditText txtEPais;
+    private EditText txtEDireccion;
     private Spinner spinnerEstado;
     private Button btnRealizarCalculos;
     private boolean editar;
@@ -48,9 +48,9 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_crear_proyecto);
         Intent intent = getIntent();
         proyectoFacadeLocal = new ProyectoFacade();
-        nombreEstructura = (EditText) findViewById(R.id.TextENombreEstructuraProyecto);
-        pais = (EditText) findViewById(R.id.TextEPaisProyecto);
-        direccion = (EditText) findViewById(R.id.TextEDireccionProyecto);
+        txtENombreEstructura = (EditText) findViewById(R.id.TextENombreEstructuraProyecto);
+        txtEPais = (EditText) findViewById(R.id.TextEPaisProyecto);
+        txtEDireccion = (EditText) findViewById(R.id.TextEDireccionProyecto);
         imgBBuscarUsuario = (ImageButton) findViewById(R.id.imgBBuscarUsuario);
         spinnerEstado = (Spinner) findViewById(R.id.spinnerEstado);
         btnRealizarCalculos = (Button) findViewById(R.id.btnRealizarCalculos);
@@ -64,11 +64,11 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
             if (intent.getExtras() != null && intent.getExtras().getSerializable("proyecto") != null) {
                 proyectoNuevo = (Proyecto) intent.getExtras().getSerializable("proyecto");
                 txtVUsuarioSeleccionado.setText(proyectoNuevo.getUsuario().getCorreo());
-                nombreEstructura.setText(proyectoNuevo.getNombreEstructura());
-                nombreEstructura.setEnabled(false);
-                pais.setText(proyectoNuevo.getPais());
-                direccion.setText(proyectoNuevo.getDireccion());
-                direccion.setEnabled(false);
+                txtENombreEstructura.setText(proyectoNuevo.getNombreEstructura());
+                txtENombreEstructura.setEnabled(false);
+                txtEPais.setText(proyectoNuevo.getPais());
+                txtEDireccion.setText(proyectoNuevo.getDireccion());
+                txtEDireccion.setEnabled(false);
                 spinnerEstado.setSelection(proyectoNuevo.getEstado().ordinal());
                 spinnerEstado.setEnabled(false);
                 imgBBuscarUsuario.setEnabled(false);
@@ -89,21 +89,6 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    private void setToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        final ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            if (proyectoNuevo.getEstatus()!=null) {
-                ab.setTitle("Proyecto");
-                btnRealizarCalculos.setText("Realizar Calculos");
-            } else {
-                ab.setTitle("Crear Proyecto");
-                btnRealizarCalculos.setText("Crear Proyecto");
-            }
-            ab.setDisplayHomeAsUpEnabled(true);
-        }
-    }
 
     @Override
     public void onClick(View v) {
@@ -117,62 +102,11 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    public void irAUsuarios() {
-        Intent intentUsuarios = new Intent(this, UsuariosActivity.class);
-        startActivity(intentUsuarios);
-        finish();
-    }
-
-    public void irARealizarCalculos() {
-        if (spinnerEstado.getSelectedItem() != "" && proyectoNuevo.getUsuario() != null) {
-            if(proyectoNuevo.getEstatus()==null || editar==true) {
-                guardarProyecto();
-            }
-            Intent intentCalulos = new Intent(this, RealizarCalculosActivity.class);
-            intentCalulos.putExtra("proyecto", proyectoNuevo);
-            startActivity(intentCalulos);
-            finish();
-        } else {
-            Toast.makeText(this, "Debe llenar todos los campos", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent = new Intent(this, InicioActivity.class);
         startActivity(intent);
-    }
-
-    public void guardarProyecto(){
-        try {
-            proyectoNuevo.setEstado((Estado) spinnerEstado.getSelectedItem());
-            proyectoNuevo.setNombreEstructura(nombreEstructura.getText().toString());
-            proyectoNuevo.setPais(pais.getText().toString());
-            proyectoNuevo.setDireccion(direccion.getText().toString());
-            proyectoNuevo.setEstatus(Estatus.EN_PROCESO);
-            proyectoFacadeLocal.crear(proyectoNuevo);
-        } catch (SQLException e) {
-            Toast.makeText(this, "Ocurrio un problema al crear el proyecto", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void editar(){
-        nombreEstructura.setEnabled(true);
-        direccion.setEnabled(true);
-        spinnerEstado.setEnabled(true);
-        imgBBuscarUsuario.setEnabled(true);
-        btnRealizarCalculos.setText("Editar Proyecto");
-        editar=true;
-    }
-
-    public void eliminar(){
-        try {
-            proyectoFacadeLocal.eliminar(proyectoNuevo);
-            onBackPressed();
-        } catch (SQLException e) {
-            Toast.makeText(this, "Ocurrio un problema al eliminar el proyecto", Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override
@@ -190,7 +124,7 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         int id = item.getItemId();
         switch (id){
             case R.id.accion_editar:
-                editar();
+                habilitar(true);
                 break;
             case  R.id.accion_eliminar:
                 eliminar();
@@ -198,5 +132,77 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         }
         return super.onOptionsItemSelected(item);
     }
+    public void irAUsuarios() {
+        Intent intentUsuarios = new Intent(this, UsuariosActivity.class);
+        startActivity(intentUsuarios);
+    }
 
+    public void irARealizarCalculos() {
+        if (spinnerEstado.getSelectedItem() != "" && proyectoNuevo.getUsuario() != null) {
+            if(proyectoNuevo.getEstatus()==null || editar==true) {
+                guardarProyecto();
+            }
+            if(btnRealizarCalculos.getText().toString().equalsIgnoreCase("Realizar Calculos")) {
+                Intent intentCalulos = new Intent(this, RealizarCalculosActivity.class);
+                intentCalulos.putExtra("proyecto", proyectoNuevo);
+                startActivity(intentCalulos);
+            }
+            btnRealizarCalculos.setText("Realizar Calculos");
+        } else {
+            Toast.makeText(this, "Debe llenar todos los campos", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void guardarProyecto(){
+        try {
+            proyectoNuevo.setEstado((Estado) spinnerEstado.getSelectedItem());
+            proyectoNuevo.setNombreEstructura(txtENombreEstructura.getText().toString());
+            proyectoNuevo.setPais(txtEPais.getText().toString());
+            proyectoNuevo.setDireccion(txtEDireccion.getText().toString());
+            proyectoNuevo.setEstatus(Estatus.EN_PROCESO);
+            proyectoFacadeLocal.crear(proyectoNuevo);
+            if(editar){
+                editar=false;
+                habilitar(false);
+            }
+        } catch (SQLException e) {
+            Toast.makeText(this, "Ocurrio un problema al crear el proyecto", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void habilitar(boolean activo){
+        editar=activo;
+        txtENombreEstructura.setEnabled(activo);
+        txtEDireccion.setEnabled(activo);
+        spinnerEstado.setEnabled(activo);
+        imgBBuscarUsuario.setEnabled(activo);
+        if(editar) {
+            btnRealizarCalculos.setText("Editar Proyecto");
+        }
+    }
+
+    public void eliminar(){
+        try {
+            proyectoFacadeLocal.eliminar(proyectoNuevo);
+            onBackPressed();
+        } catch (SQLException e) {
+            Toast.makeText(this, "Ocurrio un problema al eliminar el proyecto", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        final ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            if (proyectoNuevo.getEstatus()!=null) {
+                ab.setTitle("Proyecto");
+                btnRealizarCalculos.setText("Realizar Calculos");
+            } else {
+                ab.setTitle("Crear Proyecto");
+                btnRealizarCalculos.setText("Crear Proyecto");
+            }
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
+    }
 }

@@ -47,7 +47,6 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.btnNuevoProyecto);
         fab.setOnClickListener(this);
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -55,7 +54,6 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
                 Intent intent= new Intent(this,CrearProyectoActivity.class);
                 intent.putExtra("accion","crear");
                 startActivity(intent);
-                finish();
                 break;
         }
     }

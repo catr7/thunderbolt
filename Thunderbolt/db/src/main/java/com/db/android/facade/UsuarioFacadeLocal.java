@@ -12,6 +12,7 @@ import java.util.List;
 public interface UsuarioFacadeLocal {
 
     void crear(Usuario usuario) throws SQLException;
+    void eliminar(Usuario usuario)throws SQLException;
     Usuario buscarPorNombre(String nombre) throws SQLException;
     List<Usuario> buscarUsuarios() throws SQLException;
 }

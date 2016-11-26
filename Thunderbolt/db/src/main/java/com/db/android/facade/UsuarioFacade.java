@@ -27,6 +27,14 @@ public class UsuarioFacade implements UsuarioFacadeLocal {
     }
 
     @Override
+    public void eliminar(Usuario usuario) throws SQLException {
+        Dao dao = null;
+        DBHelper dbHelper= new DBHelper(ContextProvider.getContext());
+        dao = dbHelper.getHelper().getUsuarioDao();
+        dao.delete(usuario);
+    }
+
+    @Override
     public Usuario buscarPorNombre(String nombre) throws SQLException {
         Dao dao = null;
         DBHelper dbHelper= new DBHelper(ContextProvider.getContext());

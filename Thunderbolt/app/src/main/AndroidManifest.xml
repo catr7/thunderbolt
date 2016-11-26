@@ -11,6 +11,7 @@
         <activity
             android:name=".vista.InicioActivity"
             android:label="@string/app_name"
+            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,13 +19,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vista.CrearProyectoActivity" />
+        <activity
+            android:name=".vista.CrearProyectoActivity"
+            android:noHistory="true"/>
         <activity
             android:name=".vista.UsuariosActivity"
             android:label="@string/title_activity_usuarios"
+            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".vista.CrearUsuarioActivity" />
-        <activity android:name=".vista.RealizarCalculosActivity"></activity>
+        <activity
+            android:noHistory="true"
+            android:name=".vista.CrearUsuarioActivity" />
+        <activity
+            android:name=".vista.RealizarCalculosActivity">
+            android:noHistory="true"
+        </activity>
     </application>
 
 </manifest>
