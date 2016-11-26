@@ -5,6 +5,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,12 +38,16 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
     private EditText direccion;
     private Spinner spinnerEstado;
     private Button btnRealizarCalculos;
+    private boolean editar;
+    private  ProyectoFacadeLocal proyectoFacadeLocal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_proyecto);
         Intent intent = getIntent();
+        proyectoFacadeLocal = new ProyectoFacade();
         nombreEstructura = (EditText) findViewById(R.id.TextENombreEstructuraProyecto);
         pais = (EditText) findViewById(R.id.TextEPaisProyecto);
         direccion = (EditText) findViewById(R.id.TextEDireccionProyecto);
@@ -59,9 +65,14 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
                 proyectoNuevo = (Proyecto) intent.getExtras().getSerializable("proyecto");
                 txtVUsuarioSeleccionado.setText(proyectoNuevo.getUsuario().getCorreo());
                 nombreEstructura.setText(proyectoNuevo.getNombreEstructura());
+                nombreEstructura.setEnabled(false);
                 pais.setText(proyectoNuevo.getPais());
                 direccion.setText(proyectoNuevo.getDireccion());
+                direccion.setEnabled(false);
                 spinnerEstado.setSelection(proyectoNuevo.getEstado().ordinal());
+                spinnerEstado.setEnabled(false);
+                imgBBuscarUsuario.setEnabled(false);
+                editar=false;
             } else {
                 proyectoNuevo = new Proyecto();
                 proyectoNuevo.setFechaCreacion(new Date());
@@ -114,18 +125,8 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
 
     public void irARealizarCalculos() {
         if (spinnerEstado.getSelectedItem() != "" && proyectoNuevo.getUsuario() != null) {
-            ProyectoFacadeLocal proyectoFacadeLocal = new ProyectoFacade();
-            if(proyectoNuevo.getEstatus()==null) {
-                try {
-                    proyectoNuevo.setEstado((Estado) spinnerEstado.getSelectedItem());
-                    proyectoNuevo.setNombreEstructura(nombreEstructura.getText().toString());
-                    proyectoNuevo.setPais(pais.getText().toString());
-                    proyectoNuevo.setDireccion(direccion.getText().toString());
-                    proyectoNuevo.setEstatus(Estatus.EN_PROCESO);
-                    proyectoFacadeLocal.crear(proyectoNuevo);
-                } catch (SQLException e) {
-                    Toast.makeText(this, "Ocurrio un problema al crear el proyecto", Toast.LENGTH_SHORT).show();
-                }
+            if(proyectoNuevo.getEstatus()==null || editar==true) {
+                guardarProyecto();
             }
             Intent intentCalulos = new Intent(this, RealizarCalculosActivity.class);
             intentCalulos.putExtra("proyecto", proyectoNuevo);
@@ -141,6 +142,61 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         super.onBackPressed();
         Intent intent = new Intent(this, InicioActivity.class);
         startActivity(intent);
+    }
+
+    public void guardarProyecto(){
+        try {
+            proyectoNuevo.setEstado((Estado) spinnerEstado.getSelectedItem());
+            proyectoNuevo.setNombreEstructura(nombreEstructura.getText().toString());
+            proyectoNuevo.setPais(pais.getText().toString());
+            proyectoNuevo.setDireccion(direccion.getText().toString());
+            proyectoNuevo.setEstatus(Estatus.EN_PROCESO);
+            proyectoFacadeLocal.crear(proyectoNuevo);
+        } catch (SQLException e) {
+            Toast.makeText(this, "Ocurrio un problema al crear el proyecto", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void editar(){
+        nombreEstructura.setEnabled(true);
+        direccion.setEnabled(true);
+        spinnerEstado.setEnabled(true);
+        imgBBuscarUsuario.setEnabled(true);
+        btnRealizarCalculos.setText("Editar Proyecto");
+        editar=true;
+    }
+
+    public void eliminar(){
+        try {
+            proyectoFacadeLocal.eliminar(proyectoNuevo);
+            onBackPressed();
+        } catch (SQLException e) {
+            Toast.makeText(this, "Ocurrio un problema al eliminar el proyecto", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        switch (id){
+            case R.id.accion_editar:
+                editar();
+                break;
+            case  R.id.accion_eliminar:
+                eliminar();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

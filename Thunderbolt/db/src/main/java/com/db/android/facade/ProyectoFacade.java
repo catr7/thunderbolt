@@ -24,6 +24,14 @@ public class ProyectoFacade implements ProyectoFacadeLocal {
     }
 
     @Override
+    public void eliminar(Proyecto proyecto) throws SQLException {
+        Dao dao = null;
+        DBHelper dbHelper= new DBHelper(ContextProvider.getContext());
+        dao = dbHelper.getHelper().getProyectoDao();
+        dao.delete(proyecto);
+    }
+
+    @Override
     public Proyecto buscarPorId(Long id) throws SQLException {
         Dao dao = null;
         DBHelper dbHelper= new DBHelper(ContextProvider.getContext());

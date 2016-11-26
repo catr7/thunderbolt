@@ -12,6 +12,7 @@ import java.util.List;
 public interface ProyectoFacadeLocal {
 
     void crear(Proyecto proyecto) throws SQLException;
+    void eliminar(Proyecto proyecto)throws SQLException;
     Proyecto buscarPorId(Long id) throws SQLException;
     List<Proyecto> buscarProyectos() throws SQLException;
 }
