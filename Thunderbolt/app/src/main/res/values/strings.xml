@@ -2,4 +2,9 @@
     <string name="app_name">Thunderbolt</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_usuarios">UsuariosActivity</string>
+
+
+    <!--Dialogos-->
+    <string name="botonAceptar">ACEPTAR</string>
+    <string name="botonCancelar">CANCELAR</string>
 </resources>

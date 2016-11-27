@@ -14,6 +14,7 @@ public enum Ambiente {
 
     private final String descripcion;
     private final Double valor;
+
     Ambiente(String descripcion, Double valor) {
         this.descripcion = descripcion;
         this.valor = valor;
