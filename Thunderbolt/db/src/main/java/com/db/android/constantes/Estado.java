@@ -1,5 +1,8 @@
 package com.db.android.constantes;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Andres y Jess on 24/11/2016.
  */
@@ -21,6 +24,7 @@ public enum Estado {
 
     private final String descripcion;
     private final float valor;
+
     Estado(String descripcion, float valor) {
         this.descripcion = descripcion;
         this.valor = valor;
@@ -36,6 +40,17 @@ public enum Estado {
     @Override
     public String toString(){
         return descripcion;
+    }
+
+    public static Map<String, String[]> mapValuesEnum(){
+        Map<String, String[]> values= new HashMap<>();
+        for(Estado vEnum: Estado.values()){
+            String[] valuesEnum= new String[2];
+            valuesEnum[0]= vEnum.descripcion;
+            valuesEnum[1]= String.valueOf(vEnum.valor);
+            values.put(vEnum.name(), valuesEnum);
+        }
+        return values;
     }
 }
 

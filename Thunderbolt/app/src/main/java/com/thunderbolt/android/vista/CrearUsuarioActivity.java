@@ -139,7 +139,7 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
-        if (ab != null) {
+/*        if (ab != null) {
             if (usuario.getCorreo() != null) {
                 ab.setTitle("Usuario");
                 btnCrearUsuario.setText("Seleccionar");
@@ -148,7 +148,7 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
                 ab.setTitle("Crear Usuario");
                 btnCrearUsuario.setText("Crear Uusuario");
             }
-        }
+        }*/
     }
 
     private void habilitar(boolean activo) {

@@ -12,10 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.db.android.constantes.Ambiente;
 import com.db.android.constantes.Estado;
 import com.db.android.constantes.Estatus;
 import com.db.android.facade.ProyectoFacade;
@@ -23,15 +25,20 @@ import com.db.android.facade.ProyectoFacadeLocal;
 import com.db.android.model.Proyecto;
 import com.db.android.model.Usuario;
 import com.thunderbolt.android.R;
+import com.thunderbolt.android.vista.utils.EnumAdapter;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CrearProyectoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Usuario usuarioSeleccionado;
     private Proyecto proyectoNuevo;
-    private ImageButton imgBBuscarUsuario;
+    private ImageView imgBBuscarUsuario;
     private TextView txtVUsuarioSeleccionado;
     private EditText txtENombreEstructura;
     private EditText txtEPais;
@@ -42,16 +49,21 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
     private  ProyectoFacadeLocal proyectoFacadeLocal;
 
 
+    private Button pruebaListaEnum;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_proyecto);
         Intent intent = getIntent();
+
+        pruebaListaEnum= (Button) findViewById(R.id.btnPruebaListaEnum);
+
         proyectoFacadeLocal = new ProyectoFacade();
         txtENombreEstructura = (EditText) findViewById(R.id.TextENombreEstructuraProyecto);
         txtEPais = (EditText) findViewById(R.id.TextEPaisProyecto);
         txtEDireccion = (EditText) findViewById(R.id.TextEDireccionProyecto);
-        imgBBuscarUsuario = (ImageButton) findViewById(R.id.imgBBuscarUsuario);
+        imgBBuscarUsuario = (ImageView) findViewById(R.id.imgBBuscarUsuario);
         spinnerEstado = (Spinner) findViewById(R.id.spinnerEstado);
         btnRealizarCalculos = (Button) findViewById(R.id.btnRealizarCalculos);
         txtVUsuarioSeleccionado = (TextView) findViewById(R.id.txtVUsuario);
@@ -59,6 +71,7 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         imgBBuscarUsuario.setOnClickListener(this);
         spinnerEstado.setAdapter(new ArrayAdapter<Estado>(this, android.R.layout.simple_spinner_item, Estado.values()));
         btnRealizarCalculos.setOnClickListener(this);
+        pruebaListaEnum.setOnClickListener(this);
 
         if (proyectoNuevo == null) {
             if (intent.getExtras() != null && intent.getExtras().getSerializable("proyecto") != null) {
@@ -98,6 +111,10 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.btnRealizarCalculos:
                 irARealizarCalculos();
+                break;
+            case R.id.btnPruebaListaEnum:
+                Intent intent= new Intent(this, GenericValues.class);
+                startActivity(intent);
                 break;
         }
     }

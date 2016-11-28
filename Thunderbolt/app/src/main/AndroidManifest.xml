@@ -23,6 +23,9 @@
             android:name=".vista.CrearProyectoActivity"
             android:noHistory="true"/>
         <activity
+            android:name=".vista.GenericValues"
+            android:noHistory="true"/>
+        <activity
             android:name=".vista.UsuariosActivity"
             android:label="@string/title_activity_usuarios"
             android:noHistory="true"

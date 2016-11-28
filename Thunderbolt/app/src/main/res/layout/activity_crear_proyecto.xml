@@ -46,15 +46,14 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:textSize="13dp"
-                android:text="Usuario"
+                android:text="Seleccione un usuario"
                 android:layout_weight="0.8" />
 
-            <android.support.design.widget.FloatingActionButton
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:id="@+id/imgBBuscarUsuario"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:srcCompat="@android:drawable/ic_menu_search"
-                app:backgroundTint="?attr/colorBackgroundFloating" />
+                android:src="@android:drawable/ic_search_category_default" />
 
         </LinearLayout>
 
@@ -160,6 +159,25 @@
                     android:layout_gravity="center"
                     android:background="@drawable/boton_crear"
                     android:text="Realizar Cálculos"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10dp">
+
+                <Button
+                    android:id="@+id/btnPruebaListaEnum"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/boton_crear"
+                    android:text="Enum"
                     android:textColor="@android:color/white"
                     android:textStyle="bold" />
 
