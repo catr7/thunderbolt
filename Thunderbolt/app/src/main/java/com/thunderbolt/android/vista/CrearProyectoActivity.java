@@ -33,7 +33,9 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.thunderbolt.android.R;
+import com.thunderbolt.android.vista.utils.CrearPDF;
 import com.thunderbolt.android.vista.utils.EnumAdapter;
+import com.thunderbolt.android.vista.utils.EnviarCorreo;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -223,36 +225,10 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
     }
 
     private void crearPdf(){
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.activity_crear_proyecto);
-        Document doc=new Document();
-        String outpath= Environment.getExternalStorageDirectory()+"/pdfPrueba.pdf";
-        try {
-            PdfWriter.getInstance(doc, new FileOutputStream(outpath));
-            doc.open();
-            Paragraph preface = new Paragraph();
-            preface.add(new Paragraph("Datos Del Proyecto",new Font(Font.FontFamily.TIMES_ROMAN, 24, Font.BOLD)));
-            doc.add(preface);
-            doc.close();
-        } catch (FileNotFoundException e) {
-// TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (DocumentException e) {
-// TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
+        CrearPDF.crear("catr.pdf");
+           }
 
 public void enviarCorreo() {
-    Intent i = new Intent(Intent.ACTION_SEND);
-    i.setType("text/plain");
-    i.putExtra(Intent.EXTRA_EMAIL, new String[]{"carlosandrestorres30@gmail.com"});
-    i.putExtra(Intent.EXTRA_SUBJECT, "Calculos del impacto.");
-    i.putExtra(Intent.EXTRA_TEXT, "A continuacion se adjunta pdf con los resultados de los calculos del impacto en la estructura.");
-    i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+Environment.getExternalStorageDirectory()+"/pdfPrueba.pdf"));
-    try {
-        startActivity(Intent.createChooser(i, "Enviar Correo con:"));
-    } catch (android.content.ActivityNotFoundException ex) {
-        Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-    }
+    EnviarCorreo.enviar("carlosandrestorres30@gmail.com","pdfPrueba.pdf");
 }
 }
