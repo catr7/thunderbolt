@@ -1,6 +1,8 @@
 package com.thunderbolt.android.vista;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,9 +27,16 @@ import com.db.android.facade.ProyectoFacade;
 import com.db.android.facade.ProyectoFacadeLocal;
 import com.db.android.model.Proyecto;
 import com.db.android.model.Usuario;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.thunderbolt.android.R;
 import com.thunderbolt.android.vista.utils.EnumAdapter;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,6 +55,8 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
     private EditText txtEDireccion;
     private Spinner spinnerEstado;
     private Button btnRealizarCalculos;
+    private  Button pruebaPdf;
+    private  Button pruebaCorreo;
     private boolean editar;
     private  ProyectoFacadeLocal proyectoFacadeLocal;
 
@@ -58,7 +70,6 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         Intent intent = getIntent();
 
         pruebaListaEnum= (Button) findViewById(R.id.btnPruebaListaEnum);
-
         proyectoFacadeLocal = new ProyectoFacade();
         txtENombreEstructura = (EditText) findViewById(R.id.TextENombreEstructuraProyecto);
         txtEPais = (EditText) findViewById(R.id.TextEPaisProyecto);
@@ -73,6 +84,10 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         btnRealizarCalculos.setOnClickListener(this);
         pruebaListaEnum.setOnClickListener(this);
 
+        pruebaPdf= (Button)findViewById(R.id.btnPruebaPdf);
+        pruebaPdf.setOnClickListener(this);
+        pruebaCorreo= (Button)findViewById(R.id.btnPruebaCorreo);
+        pruebaCorreo.setOnClickListener(this);
         if (proyectoNuevo == null) {
             if (intent.getExtras() != null && intent.getExtras().getSerializable("proyecto") != null) {
                 proyectoNuevo = (Proyecto) intent.getExtras().getSerializable("proyecto");
@@ -91,9 +106,10 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
                 proyectoNuevo.setFechaCreacion(new Date());
             }
         }
-
+        if(intent.getExtras() != null && intent.getExtras().getBoolean("editar")){
+            habilitar(true);
+        }
         setToolbar();
-
         if (intent.getExtras() != null && intent.getExtras().getSerializable("usuario") != null) {
             usuarioSeleccionado = (Usuario) intent.getExtras().getSerializable("usuario");
             proyectoNuevo.setUsuario(usuarioSeleccionado);
@@ -116,6 +132,12 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
                 Intent intent= new Intent(this, GenericValues.class);
                 startActivity(intent);
                 break;
+            case R.id.btnPruebaPdf:
+                crearPdf();
+                break;
+            case  R.id.btnPruebaCorreo:
+                enviarCorreo();
+                break;
         }
     }
 
@@ -126,29 +148,6 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         startActivity(intent);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        switch (id){
-            case R.id.accion_editar:
-                habilitar(true);
-                break;
-            case  R.id.accion_eliminar:
-                eliminar();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
     public void irAUsuarios() {
         Intent intentUsuarios = new Intent(this, UsuariosActivity.class);
         startActivity(intentUsuarios);
@@ -222,4 +221,38 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
             ab.setDisplayHomeAsUpEnabled(true);
         }
     }
+
+    private void crearPdf(){
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.activity_crear_proyecto);
+        Document doc=new Document();
+        String outpath= Environment.getExternalStorageDirectory()+"/pdfPrueba.pdf";
+        try {
+            PdfWriter.getInstance(doc, new FileOutputStream(outpath));
+            doc.open();
+            Paragraph preface = new Paragraph();
+            preface.add(new Paragraph("Datos Del Proyecto",new Font(Font.FontFamily.TIMES_ROMAN, 24, Font.BOLD)));
+            doc.add(preface);
+            doc.close();
+        } catch (FileNotFoundException e) {
+// TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (DocumentException e) {
+// TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+public void enviarCorreo() {
+    Intent i = new Intent(Intent.ACTION_SEND);
+    i.setType("text/plain");
+    i.putExtra(Intent.EXTRA_EMAIL, new String[]{"carlosandrestorres30@gmail.com"});
+    i.putExtra(Intent.EXTRA_SUBJECT, "Calculos del impacto.");
+    i.putExtra(Intent.EXTRA_TEXT, "A continuacion se adjunta pdf con los resultados de los calculos del impacto en la estructura.");
+    i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+Environment.getExternalStorageDirectory()+"/pdfPrueba.pdf"));
+    try {
+        startActivity(Intent.createChooser(i, "Enviar Correo con:"));
+    } catch (android.content.ActivityNotFoundException ex) {
+        Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+    }
+}
 }

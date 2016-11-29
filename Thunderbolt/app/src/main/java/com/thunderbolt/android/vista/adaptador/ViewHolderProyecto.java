@@ -3,6 +3,8 @@ package com.thunderbolt.android.vista.adaptador;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.thunderbolt.android.R;
@@ -19,6 +21,8 @@ public class ViewHolderProyecto extends RecyclerView.ViewHolder implements View.
     TextView estado;
     TextView usuario;
     ImageView estatus;
+    ImageButton eliminar;
+    ImageButton editar;
 
     ViewHolderProyecto(View itemView) {
         super(itemView);
@@ -27,6 +31,8 @@ public class ViewHolderProyecto extends RecyclerView.ViewHolder implements View.
         nombreEstructura = (TextView) itemView.findViewById(R.id.txtVnombreEstructura);
         estado= (TextView)itemView.findViewById(R.id.txtVnombreEstado);
         usuario= (TextView)itemView.findViewById(R.id.txtVnombreCorreo);
+        eliminar= (ImageButton) itemView.findViewById(R.id.imgBBorrarProyecto);
+        editar=(ImageButton) itemView.findViewById(R.id.imgBEditarProyecto);
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);
     }
