@@ -32,10 +32,10 @@
                     android:id="@+id/txtVEstado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.14"
                     android:text="Estado: "
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="end" />
+                    android:textStyle="normal|bold"
+                    android:textSize="16sp"
+                    android:layout_gravity="start"/>
 
                 <TextView
                     android:id="@+id/txtVnombreEstado"
@@ -56,8 +56,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Estructura: "
-                    android:layout_weight="0.05"
-                    android:gravity="end" />
+                    android:textStyle="normal|bold"
+                    android:textSize="16sp"
+                    android:layout_gravity="start" />
 
                 <TextView
                     android:id="@+id/txtVnombreEstructura"
@@ -77,17 +78,18 @@
                     android:id="@+id/txtVCorreo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.11"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
                     android:text="Correo: "
-                    android:gravity="end" />
+                    android:gravity="end"
+                    android:textStyle="normal|bold"
+                    android:layout_gravity="start" />
 
                 <TextView
                     android:id="@+id/txtVnombreCorreo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
-                    android:layout_weight="0.7"
+                    android:layout_weight="0.9"
                     android:ellipsize="marquee"
                     android:maxLength="23"
                     android:maxLines="1" />
@@ -105,16 +107,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Estatus: "
-                    android:layout_weight="0.14"
-                    android:gravity="end" />
+                    android:gravity="end"
+                    android:layout_gravity="start"
+                    android:textStyle="normal|bold"
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/imgVEstatus"
-                    android:layout_width="28dp"
-                    android:layout_marginTop="-5dp"
+                    android:layout_marginTop="2dp"
                     android:layout_height="match_parent"
                     android:adjustViewBounds="false"
-                    app:srcCompat="@mipmap/estatus_incompleto" />
+                    app:srcCompat="@mipmap/estatus_incompleto"
+                    android:layout_width="21dp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -130,16 +134,18 @@
                 android:id="@+id/imgBEditarProyecto"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginBottom="6dp"
+                android:layout_marginBottom="8dp"
                 android:background="@color/cardview_light_background"
-                app:srcCompat="@mipmap/ic_editar" />
+                app:srcCompat="@mipmap/ic_editar"
+                android:layout_marginTop="4dp" />
 
             <ImageButton
                 android:id="@+id/imgBBorrarProyecto"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@color/cardview_light_background"
-                app:srcCompat="@mipmap/ic_borrar" />
+                app:srcCompat="@mipmap/ic_borrar"
+                android:layout_marginTop="8dp" />
         </LinearLayout>
 
     </LinearLayout>

@@ -27,7 +27,6 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
     private EditText txtECorreo;
     private EditText txtEDireccion;
     private EditText txtETelefono;
-    private boolean editar;
     private Usuario usuario;
     private UsuarioFacadeLocal usuarioFacadeLocal;
 
@@ -64,50 +63,11 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.accion_editar:
-                habilitar(true);
-                break;
-            case R.id.accion_eliminar:
-                eliminar();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public void accionUsuario() {
         if (txtECorreo.getText() != null && !txtECorreo.getText().toString().toString().equals("")) {
             UsuarioFacadeLocal usuarioFacadeLocal = new UsuarioFacade();
-            switch (btnCrearUsuario.getText().toString()) {
-                    case "Crear Usuario":
-                        guardar();
-                        btnCrearUsuario.setText("Seleccionar");
-                        habilitar(false);
-                        break;
-                    case "Seleccionar":
-                        Intent intent = new Intent(this, CrearProyectoActivity.class);
-                        intent.putExtra("usuario",usuario);
-                        startActivity(intent);
-                        break;
-                    case "Editar Usuario":
-                        guardar();
-                        btnCrearUsuario.setText("Seleccionar");
-                        habilitar(false);
-                        break;
-                }
+            guardar();
+
 
     }else{
             Toast.makeText(this, "Debe ingresar el correo electronico", Toast.LENGTH_SHORT).show();
@@ -122,6 +82,8 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
         usuario.setTelefono(txtETelefono.getText().toString());
         try {
             usuarioFacadeLocal.crear(usuario);
+            Intent intent = new Intent(this, UsuariosActivity.class);
+            startActivity(intent);
         } catch (SQLException e) {
             Toast.makeText(this, "error al crear el usuario", Toast.LENGTH_SHORT).show();
         }
@@ -139,27 +101,15 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
-/*        if (ab != null) {
+        if (ab != null) {
             if (usuario.getCorreo() != null) {
                 ab.setTitle("Usuario");
-                btnCrearUsuario.setText("Seleccionar");
-                habilitar(false);
+                btnCrearUsuario.setText("Editar");
             } else {
                 ab.setTitle("Crear Usuario");
                 btnCrearUsuario.setText("Crear Uusuario");
             }
-        }*/
-    }
-
-    private void habilitar(boolean activo) {
-        editar = activo;
-        txtENombre.setEnabled(activo);
-        txtEApellido.setEnabled(activo);
-        txtECorreo.setEnabled(activo);
-        txtEDireccion.setEnabled(activo);
-        txtETelefono.setEnabled(activo);
-        if (editar) {
-            btnCrearUsuario.setText("Editar Usuario");
         }
     }
+
 }
