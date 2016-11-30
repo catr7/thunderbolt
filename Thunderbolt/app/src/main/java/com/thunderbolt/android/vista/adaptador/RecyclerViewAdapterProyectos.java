@@ -58,7 +58,7 @@ public class RecyclerViewAdapterProyectos extends RecyclerView.Adapter<ViewHolde
                 } else {
                     Intent intent= new Intent(ContextProvider.getContext(), CrearProyectoActivity.class);
                     intent.putExtra("proyecto",proyectos.get(position));
-                    intent.putExtra("editar",true);
+                    intent.putExtra("editar",false);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     ContextProvider.getContext().startActivity(intent);
                 }

@@ -11,39 +11,35 @@
     android:padding="3dp">
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Titulo del Enum"
-                android:id="@+id/textViewTituloEnum"
-                android:layout_weight="0.7" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Value"
-                android:id="@+id/textViewValorEnum" />
-
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/imgVEstatusCalculo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:srcCompat="@mipmap/estatus_incompleto"
+            android:textAlignment="center"
+            android:layout_gravity="center" />
 
         <TextView
-            android:layout_width="fill_parent"
+            android:id="@+id/textViewNombreCalculo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Descripcion del Enum"
-            android:id="@+id/textViewDescripcionEnum" />
+            android:layout_weight="0.7"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textViewValorCalculo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Value"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
     </LinearLayout>
 

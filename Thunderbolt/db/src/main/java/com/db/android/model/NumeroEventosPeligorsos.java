@@ -29,18 +29,18 @@ public class NumeroEventosPeligorsos {
     @DatabaseField
     private Integer longitud_de_la_acometida;
     @DatabaseField
-     private float calculo_np;
+     private Float calculo_np;
     @DatabaseField
-    private float calculo_nm;
+    private Float calculo_nm;
     @DatabaseField
-    private float calculo_nl;
+    private Float calculo_nl;
     @DatabaseField
-    private float calculo_ni;
+    private Float calculo_ni;
 
     public NumeroEventosPeligorsos() {
     }
 
-    public NumeroEventosPeligorsos(Long id, DimensionesEstructura dimensionesEstructura, EstructuraEnEvaluacion estructuraEnEvaluacion, EnrutamientoDeAcometida enrutamientoDeAcometida, TransformadorEnAcometida transformadorEnAcometida, Ambiente ambiente, Integer longitud_de_la_acometida, float calculo_np, float calculo_nm, float calculo_nl, float calculo_ni) {
+    public NumeroEventosPeligorsos(Long id, DimensionesEstructura dimensionesEstructura, EstructuraEnEvaluacion estructuraEnEvaluacion, EnrutamientoDeAcometida enrutamientoDeAcometida, TransformadorEnAcometida transformadorEnAcometida, Ambiente ambiente, Integer longitud_de_la_acometida, Float calculo_np, Float calculo_nm, Float calculo_nl, Float calculo_ni) {
         this.id = id;
         this.dimensionesEstructura = dimensionesEstructura;
         this.estructuraEnEvaluacion = estructuraEnEvaluacion;
@@ -110,35 +110,35 @@ public class NumeroEventosPeligorsos {
         this.longitud_de_la_acometida = longitud_de_la_acometida;
     }
 
-    public float getCalculo_np() {
+    public Float getCalculo_np() {
         return calculo_np;
     }
 
-    public void setCalculo_np(float calculo_np) {
+    public void setCalculo_np(Float calculo_np) {
         this.calculo_np = calculo_np;
     }
 
-    public float getCalculo_nm() {
+    public Float getCalculo_nm() {
         return calculo_nm;
     }
 
-    public void setCalculo_nm(float calculo_nm) {
+    public void setCalculo_nm(Float calculo_nm) {
         this.calculo_nm = calculo_nm;
     }
 
-    public float getCalculo_nl() {
+    public Float getCalculo_nl() {
         return calculo_nl;
     }
 
-    public void setCalculo_nl(float calculo_nl) {
+    public void setCalculo_nl(Float calculo_nl) {
         this.calculo_nl = calculo_nl;
     }
 
-    public float getCalculo_ni() {
+    public Float getCalculo_ni() {
         return calculo_ni;
     }
 
-    public void setCalculo_ni(float calculo_ni) {
+    public void setCalculo_ni(Float calculo_ni) {
         this.calculo_ni = calculo_ni;
     }
 }
