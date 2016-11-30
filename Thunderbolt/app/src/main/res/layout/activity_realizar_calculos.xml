@@ -28,4 +28,16 @@
         android:layout_marginTop="@android:dimen/notification_large_icon_height"
         android:scrollbars="vertical" />
 
+    <Button
+        android:id="@+id/btnEnviarCorreo"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/boton_crear"
+        android:text="Enviar Resultados"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_gravity="bottom"
+        android:enabled="false"
+        android:layout_marginBottom="26dp" />
+
 </android.support.design.widget.CoordinatorLayout>

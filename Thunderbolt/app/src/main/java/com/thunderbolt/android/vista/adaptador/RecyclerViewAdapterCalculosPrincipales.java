@@ -1,13 +1,18 @@
 package com.thunderbolt.android.vista.adaptador;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.base.android.ContextProvider;
 import com.db.android.constantes.CalculosPrincipales;
+import com.db.android.model.NumeroEventosPeligorsos;
 import com.db.android.model.Proyecto;
 import com.thunderbolt.android.R;
+import com.thunderbolt.android.vista.CrearProyectoActivity;
+import com.thunderbolt.android.vista.NumeroEventosPeligrososActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,6 +50,19 @@ public class RecyclerViewAdapterCalculosPrincipales extends RecyclerView.Adapter
                 }else{
                     holder.estatus.setImageResource(R.mipmap.estatus_incompleto);
                 }
+                holder.setClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick) {
+                        if (isLongClick) {
+                            //aca se puede colocar un dialogo para elimar
+                        } else {
+                            Intent intent= new Intent(ContextProvider.getContext(), NumeroEventosPeligrososActivity.class);
+                            intent.putExtra("proyecto",proyecto);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            ContextProvider.getContext().startActivity(intent);
+                        }
+                    }
+                });
                 break;
             case 1:
                 break;

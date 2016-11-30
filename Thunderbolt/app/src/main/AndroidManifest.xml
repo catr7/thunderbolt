@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.thunderbolt.android">
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,22 +24,22 @@
         </activity>
         <activity
             android:name=".vista.CrearProyectoActivity"
-            android:noHistory="true"/>
+            android:noHistory="true" />
         <activity
             android:name=".vista.GenericValues"
-            android:noHistory="true"/>
+            android:noHistory="true" />
         <activity
             android:name=".vista.UsuariosActivity"
             android:label="@string/title_activity_usuarios"
             android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:noHistory="true"
-            android:name=".vista.CrearUsuarioActivity" />
-        <activity
-            android:name=".vista.RealizarCalculosActivity">
+            android:name=".vista.CrearUsuarioActivity"
+            android:noHistory="true" />
+        <activity android:name=".vista.RealizarCalculosActivity">
             android:noHistory="true"
         </activity>
+        <activity android:name=".vista.NumeroEventosPeligrososActivity"></activity>
     </application>
 
 </manifest>

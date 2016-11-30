@@ -9,11 +9,11 @@ import java.util.Map;
 
 public enum  CalculosPrincipales {
 
-    NUMERO_EVENTOS_PELIGROSOS("Cálculos de números de eventos peligrosos");
-    /*PROBABILIDAD_DE_DAÑO("Cálculos de la probabilidad de daño"),
-    PERDIDAS_DE_VIDAS_HUMANAS("Cálculos de perdidas consecuentes: Perdidas de vidas humnas"),
-    PERDIDAS_SERVICIOS_PUBLICOS("Cálculos de perdidas consecuentes: Perdidas inaceptables de servicios publicos");
-*/
+    NUMERO_EVENTOS_PELIGROSOS("Números de Eventos Peligrosos"),
+    PROBABILIDAD_DE_DAÑO("Probabilidad de Daño"),
+    PERDIDAS_DE_VIDAS_HUMANAS("Perdidas Consecuentes: Perdidas de Vidas Humnas"),
+    PERDIDAS_SERVICIOS_PUBLICOS("Perdidas Consecuentes: Perdidas Inaceptables de Servicios Publicos");
+
     private final String descripcion;
 
     CalculosPrincipales(String descripcion) {

@@ -27,24 +27,12 @@ import com.db.android.facade.ProyectoFacade;
 import com.db.android.facade.ProyectoFacadeLocal;
 import com.db.android.model.Proyecto;
 import com.db.android.model.Usuario;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
 import com.thunderbolt.android.R;
 import com.thunderbolt.android.vista.utils.CrearPDF;
-import com.thunderbolt.android.vista.utils.EnumAdapter;
 import com.thunderbolt.android.vista.utils.EnviarCorreo;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 public class CrearProyectoActivity extends AppCompatActivity implements View.OnClickListener {
 
