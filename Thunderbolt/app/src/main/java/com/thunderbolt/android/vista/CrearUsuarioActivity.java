@@ -50,6 +50,8 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
             txtECorreo.setText(usuario.getCorreo());
             txtEDireccion.setText(usuario.getDireccion());
             txtETelefono.setText(usuario.getTelefono());
+        }else{
+            usuario=new Usuario();
         }
         setToolbar();
     }
@@ -102,7 +104,7 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            if (usuario.getCorreo() != null) {
+            if (usuario != null) {
                 ab.setTitle("Usuario");
                 btnCrearUsuario.setText("Editar");
             } else {
