@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.base.android.ContextProvider;
 import com.db.android.facade.UsuarioFacade;
 import com.db.android.facade.UsuarioFacadeLocal;
+import com.db.android.model.Proyecto;
 import com.db.android.model.Usuario;
 import com.thunderbolt.android.R;
 import com.thunderbolt.android.vista.CrearProyectoActivity;
@@ -25,8 +26,10 @@ import java.util.List;
 
 public class RecyclerViewAdapterUsuarios extends RecyclerView.Adapter<ViewHolderUsuario> implements View.OnClickListener {
     private List<Usuario> usuarios;
-    public RecyclerViewAdapterUsuarios(List<Usuario> usuarios) {
+    private Proyecto proyecto;
+    public RecyclerViewAdapterUsuarios(List<Usuario> usuarios, Proyecto proyecto) {
         this.usuarios = usuarios;
+        this.proyecto = proyecto;
     }
     private UsuarioFacadeLocal usuarioFacadeLocal;
     private int posicion;
@@ -56,6 +59,7 @@ public class RecyclerViewAdapterUsuarios extends RecyclerView.Adapter<ViewHolder
                     } else {
                     Intent intent= new Intent(ContextProvider.getContext(), CrearProyectoActivity.class);
                     intent.putExtra("usuario",usuarios.get(position));
+                    intent.putExtra("proyecto",proyecto);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     ContextProvider.getContext().startActivity(intent);
                     }

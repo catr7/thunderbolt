@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.db.android.facade.UsuarioFacade;
 import com.db.android.facade.UsuarioFacadeLocal;
+import com.db.android.model.Proyecto;
 import com.db.android.model.Usuario;
 import com.thunderbolt.android.R;
 import com.thunderbolt.android.vista.adaptador.RecyclerViewAdapterUsuarios;
@@ -22,6 +23,7 @@ import java.util.List;
 
 public class UsuariosActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private Proyecto proyecto;
     private RecyclerView.LayoutManager manager;
     private RecyclerView recyclerView;
 
@@ -30,6 +32,7 @@ public class UsuariosActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuarios);
         setToolbar();
+        Intent intent = getIntent();
         recyclerView = (RecyclerView) findViewById(R.id.listaUsuarios);
         List<Usuario> usuarios= new ArrayList<>();
         UsuarioFacadeLocal usuarioFacadeLocal = new UsuarioFacade();
@@ -38,7 +41,10 @@ public class UsuariosActivity extends AppCompatActivity implements View.OnClickL
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        RecyclerViewAdapterUsuarios adaptador = new RecyclerViewAdapterUsuarios(usuarios);
+        if (intent.getExtras() != null && intent.getExtras().getSerializable("proyecto") != null) {
+            proyecto= (Proyecto) intent.getExtras().getSerializable("proyecto");
+        }
+        RecyclerViewAdapterUsuarios adaptador = new RecyclerViewAdapterUsuarios(usuarios,proyecto);
         manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adaptador);

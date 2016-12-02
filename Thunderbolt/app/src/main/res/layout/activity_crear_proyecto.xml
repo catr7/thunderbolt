@@ -170,38 +170,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_margin="10dp">
-
-                <Button
-                    android:id="@+id/btnPruebaListaEnum"
-                    android:layout_width="260dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/boton_crear"
-                    android:text="Enum"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btnPruebaPdf"
-                    android:layout_width="260dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/boton_crear"
-                    android:layout_marginBottom="8dp"
-                    android:text="pdf"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btnPruebaCorreo"
-                    android:layout_width="260dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/boton_crear"
-                    android:text="enviar correo"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

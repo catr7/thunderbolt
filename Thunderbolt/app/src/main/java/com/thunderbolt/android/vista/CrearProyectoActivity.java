@@ -1,26 +1,18 @@
 package com.thunderbolt.android.vista;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Environment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.db.android.constantes.Ambiente;
 import com.db.android.constantes.Estado;
 import com.db.android.constantes.Estatus;
 import com.db.android.facade.ProyectoFacade;
@@ -45,13 +37,8 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
     private EditText txtEDireccion;
     private Spinner spinnerEstado;
     private Button btnRealizarCalculos;
-    private  Button pruebaPdf;
-    private  Button pruebaCorreo;
     private boolean editar;
     private  ProyectoFacadeLocal proyectoFacadeLocal;
-
-
-    private Button pruebaListaEnum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +46,6 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_crear_proyecto);
         Intent intent = getIntent();
 
-        pruebaListaEnum= (Button) findViewById(R.id.btnPruebaListaEnum);
         proyectoFacadeLocal = new ProyectoFacade();
         txtENombreEstructura = (EditText) findViewById(R.id.TextENombreEstructuraProyecto);
         txtEPais = (EditText) findViewById(R.id.TextEPaisProyecto);
@@ -72,12 +58,7 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         imgBBuscarUsuario.setOnClickListener(this);
         spinnerEstado.setAdapter(new ArrayAdapter<Estado>(this, android.R.layout.simple_spinner_item, Estado.values()));
         btnRealizarCalculos.setOnClickListener(this);
-        pruebaListaEnum.setOnClickListener(this);
 
-        pruebaPdf= (Button)findViewById(R.id.btnPruebaPdf);
-        pruebaPdf.setOnClickListener(this);
-        pruebaCorreo= (Button)findViewById(R.id.btnPruebaCorreo);
-        pruebaCorreo.setOnClickListener(this);
         if (proyectoNuevo == null) {
             if (intent.getExtras() != null && intent.getExtras().getSerializable("proyecto") != null) {
                 proyectoNuevo = (Proyecto) intent.getExtras().getSerializable("proyecto");
@@ -108,7 +89,6 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
 
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -117,16 +97,6 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.btnRealizarCalculos:
                 irARealizarCalculos();
-                break;
-            case R.id.btnPruebaListaEnum:
-                Intent intent= new Intent(this, GenericValues.class);
-                startActivity(intent);
-                break;
-            case R.id.btnPruebaPdf:
-                crearPdf();
-                break;
-            case  R.id.btnPruebaCorreo:
-                enviarCorreo();
                 break;
         }
     }
@@ -140,6 +110,7 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
 
     public void irAUsuarios() {
         Intent intentUsuarios = new Intent(this, UsuariosActivity.class);
+        intentUsuarios.putExtra("proyecto", proyectoNuevo);
         startActivity(intentUsuarios);
     }
 
