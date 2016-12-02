@@ -77,10 +77,10 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
                 proyectoNuevo.setFechaCreacion(new Date());
             }
         }
+        setToolbar();
         if(intent.getExtras() != null && intent.getExtras().getBoolean("editar")){
             habilitar(true);
         }
-        setToolbar();
         if (intent.getExtras() != null && intent.getExtras().getSerializable("usuario") != null) {
             usuarioSeleccionado = (Usuario) intent.getExtras().getSerializable("usuario");
             proyectoNuevo.setUsuario(usuarioSeleccionado);
@@ -111,6 +111,7 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
     public void irAUsuarios() {
         Intent intentUsuarios = new Intent(this, UsuariosActivity.class);
         intentUsuarios.putExtra("proyecto", proyectoNuevo);
+        intentUsuarios.putExtra("editar",editar);
         startActivity(intentUsuarios);
     }
 

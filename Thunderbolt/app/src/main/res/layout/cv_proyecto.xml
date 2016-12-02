@@ -35,7 +35,7 @@
                     android:id="@+id/txtVEstado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
+                    android:layout_gravity="start"
                     android:text="nombre: "
                     android:textSize="16sp"
                     android:textStyle="normal|bold" />
@@ -44,7 +44,7 @@
                     android:id="@+id/txtVEstructura"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
+                    android:layout_gravity="start"
                     android:text="Apellido: "
                     android:textSize="16sp"
                     android:textStyle="normal|bold" />
@@ -53,7 +53,7 @@
                     android:id="@+id/txtVCorreo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
+                    android:layout_gravity="start"
                     android:gravity="end"
                     android:text="Correo: "
                     android:textSize="16sp"
@@ -133,7 +133,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
+                android:layout_marginBottom="3dp"
                 android:layout_weight="0.9"
+                android:textStyle="normal|bold"
                 android:text="Estatus:" />
 
             <ImageView

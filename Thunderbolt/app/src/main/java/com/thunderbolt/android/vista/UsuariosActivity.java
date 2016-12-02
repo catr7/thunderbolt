@@ -23,6 +23,7 @@ import java.util.List;
 
 public class UsuariosActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private boolean editar;
     private Proyecto proyecto;
     private RecyclerView.LayoutManager manager;
     private RecyclerView recyclerView;
@@ -44,7 +45,10 @@ public class UsuariosActivity extends AppCompatActivity implements View.OnClickL
         if (intent.getExtras() != null && intent.getExtras().getSerializable("proyecto") != null) {
             proyecto= (Proyecto) intent.getExtras().getSerializable("proyecto");
         }
-        RecyclerViewAdapterUsuarios adaptador = new RecyclerViewAdapterUsuarios(usuarios,proyecto);
+        if(intent.getExtras() != null && intent.getExtras().getBoolean("editar")){
+           editar=true;
+        }
+        RecyclerViewAdapterUsuarios adaptador = new RecyclerViewAdapterUsuarios(usuarios,proyecto,editar);
         manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adaptador);
@@ -69,6 +73,8 @@ public class UsuariosActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()){
             case R.id.btnNuevoUsuario:
                 Intent intent= new Intent(this,CrearUsuarioActivity.class);
+                intent.putExtra("proyecto",proyecto);
+                intent.putExtra("editar",editar);
                 startActivity(intent);
                 break;
         }
@@ -83,6 +89,8 @@ public class UsuariosActivity extends AppCompatActivity implements View.OnClickL
     public void onBackPressed() {
         super.onBackPressed();
         Intent intent= new Intent(this,CrearProyectoActivity.class);
+        intent.putExtra("proyecto",proyecto);
+        intent.putExtra("editar",editar);
         startActivity(intent);
     }
 }

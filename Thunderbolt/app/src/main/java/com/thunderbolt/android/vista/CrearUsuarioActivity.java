@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.db.android.facade.UsuarioFacade;
 import com.db.android.facade.UsuarioFacadeLocal;
+import com.db.android.model.Proyecto;
 import com.db.android.model.Usuario;
 import com.thunderbolt.android.R;
 
@@ -27,6 +28,8 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
     private EditText txtECorreo;
     private EditText txtEDireccion;
     private EditText txtETelefono;
+    private boolean editar;
+    private Proyecto proyecto;
     private Usuario usuario;
     private UsuarioFacadeLocal usuarioFacadeLocal;
 
@@ -53,6 +56,12 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
         }else{
             usuario=new Usuario();
         }
+        if (intent.getExtras() != null && intent.getExtras().getSerializable("proyecto") != null) {
+            proyecto= (Proyecto) intent.getExtras().getSerializable("proyecto");
+        }
+        if(intent.getExtras() != null && intent.getExtras().getBoolean("editar")){
+            editar=true;
+        }
         setToolbar();
     }
 
@@ -65,12 +74,18 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent= new Intent(this,UsuariosActivity.class);
+        intent.putExtra("proyecto",proyecto);
+        intent.putExtra("editar",editar);
+        startActivity(intent);
+    }
+
     public void accionUsuario() {
         if (txtECorreo.getText() != null && !txtECorreo.getText().toString().toString().equals("")) {
-            UsuarioFacadeLocal usuarioFacadeLocal = new UsuarioFacade();
             guardar();
-
-
     }else{
             Toast.makeText(this, "Debe ingresar el correo electronico", Toast.LENGTH_SHORT).show();
         }
@@ -85,6 +100,8 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
         try {
             usuarioFacadeLocal.crear(usuario);
             Intent intent = new Intent(this, UsuariosActivity.class);
+            intent.putExtra("proyecto",proyecto);
+            intent.putExtra("editar",editar);
             startActivity(intent);
         } catch (SQLException e) {
             Toast.makeText(this, "error al crear el usuario", Toast.LENGTH_SHORT).show();
@@ -104,12 +121,12 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            if (usuario != null) {
+            if (usuario.getCorreo() != null) {
                 ab.setTitle("Usuario");
                 btnCrearUsuario.setText("Editar");
             } else {
                 ab.setTitle("Crear Usuario");
-                btnCrearUsuario.setText("Crear Uusuario");
+                btnCrearUsuario.setText("Crear Usuario");
             }
         }
     }
