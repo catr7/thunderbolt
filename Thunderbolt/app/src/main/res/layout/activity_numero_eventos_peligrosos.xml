@@ -21,114 +21,301 @@
 
             <include layout="@layout/toolbar" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15px"
+                android:layout_marginRight="15px"
+                android:background="@color/verde" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#cccccc"
+            android:clickable="true"
+            android:onClick="toggle_S1"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:orientation="vertical"
-                android:padding="5dp">
-
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/txtVDimension"
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:gravity="center"
-                    android:textColor="@color/grisOscuro"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:layout_weight="0.8"
-                    android:textStyle="bold"
-                    android:text="Dimensiones de la Estructura:"
-                    android:textSize="18dp" />
+                    android:padding="8dp"
+                    android:text="S1: Descarga de Rayo Sobre la Estructura"
+                    android:textColor="@color/grisOscuro"
+                    android:textSize="16dp"
+                    android:textStyle="normal|bold" />
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="4dp"
+                    app:srcCompat="@android:drawable/arrow_down_float" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="3dp"
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/txtEstatusS1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_weight="0.9"
+                    android:textStyle="normal|bold"
+                    android:text="Estatus:" />
 
-                    <TextView
-                        android:id="@+id/textVLargo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:text="Largo:"
-                        android:layout_weight="0.1"
-                        android:textColor="@color/grisOscuro"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/imgVEstatusS1"
+                    android:layout_width="23dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="-2dp"
+                    app:srcCompat="@mipmap/estatus_incompleto" />
 
-                    <EditText
-                        android:id="@+id/textVLargoDimension"
-                        android:inputType="numberDecimal"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:layout_width="wrap_content"
-                        android:layout_weight="0.6"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="3dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textVAncho"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:layout_weight="0.1"
-                        android:text="Ancho:"
-                        android:textColor="@color/grisOscuro"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/textVAnchoDimension"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_weight="0.6"
-                        android:gravity="left"
-                        android:inputType="numberDecimal"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="3dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textVAlto"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1"
-                        android:gravity="left"
-                        android:text="Alto:"
-                        android:textColor="@color/grisOscuro"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/textVAltoDimension"
-                        android:gravity="left"
-                        android:inputType="numberDecimal"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_weight="0.6"/>
-                </LinearLayout>
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15px"
+                android:layout_marginRight="15px"
+                android:background="@color/verde" />
+            </LinearLayout>
+            <include
+                layout="@layout/numero_eventos_peligrosos_s1"
+                android:id="toogleS1" />
+            //linear de S1
 
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15px"
+                android:layout_marginRight="15px"
+                android:background="@color/verde" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#cccccc"
+            android:clickable="true"
+            android:onClick="toggle_S2"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="left"
+                    android:layout_weight="0.8"
+                    android:padding="8dp"
+                    android:text="S2: Descargas de Rayo Cerca de la Estructura"
+                    android:textColor="@color/grisOscuro"
+                    android:textSize="16dp"
+                    android:textStyle="normal|bold" />
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="4dp"
+                    app:srcCompat="@android:drawable/arrow_down_float" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtEstatusS2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_weight="0.9"
+                    android:textStyle="normal|bold"
+                    android:text="Estatus:" />
+
+                <ImageView
+                    android:id="@+id/imgVEstatusS2"
+                    android:layout_width="23dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="-2dp"
+                    app:srcCompat="@mipmap/estatus_incompleto" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15px"
+                android:layout_marginRight="15px"
+                android:background="@color/verde" />
+            </LinearLayout>
+            //linaer S2
+
+        <LinearLayout
+            android:background="#cccccc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:onClick="toggle_S3"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="left"
+                    android:layout_weight="0.8"
+                    android:padding="8dp"
+                    android:text="S3: Descarga de Rayo Sobre la Acometida"
+                    android:textColor="@color/grisOscuro"
+                    android:textSize="16dp"
+                    android:textStyle="normal|bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="4dp"
+                    app:srcCompat="@android:drawable/arrow_down_float" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtEstatusS3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_weight="0.9"
+                    android:textStyle="normal|bold"
+                    android:text="Estatus:" />
+
+                <ImageView
+                    android:id="@+id/imgVEstatusS3"
+                    android:layout_width="23dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="-2dp"
+                    app:srcCompat="@mipmap/estatus_incompleto" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15px"
+                android:layout_marginRight="15px"
+                android:background="@color/verde" />
+            </LinearLayout>
+            //linear S3
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#cccccc"
+            android:clickable="true"
+            android:onClick="toggle_S4"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="left"
+                    android:layout_weight="0.8"
+                    android:padding="8dp"
+                    android:text="S4: Descarga de Rayo Cerca de la Acometida"
+                    android:textColor="@color/grisOscuro"
+                    android:textSize="16dp"
+                    android:textStyle="normal|bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="4dp"
+                    app:srcCompat="@android:drawable/arrow_down_float" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtEstatusS4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginBottom="9dp"
+                    android:layout_weight="0.9"
+                    android:textStyle="normal|bold"
+                    android:text="Estatus:" />
+
+                <ImageView
+                    android:id="@+id/imgVEstatusS4"
+                    android:layout_width="23dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="-2dp"
+                    app:srcCompat="@mipmap/estatus_incompleto" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15px"
+                android:layout_marginRight="15px"
+                android:background="@color/verde" />
+            </LinearLayout>
+            //linear S4
+       //fin de la pantalla
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
