@@ -12,7 +12,6 @@ public enum TransformadorEnAcometida {
     DE_ENERGIA_EN_BAJA_TENSION_TELECOMUNICACIONES_O_LINEA_DE_DATOS("De energía en baja tensión, telecomunicaciones o línea de datos",1.00),
     LINEA_ELECTRICA_DE_ALTO_VOLTAJE_CON_TRANSFORMACION_DE_ALTA_A_BAJA_TENSION("Línea eléctrica de alto voltaje con transformación de alta a baja tensión",0.2);
 
-
     private final String descripcion;
     private final Double valor;
     TransformadorEnAcometida(String descripcion, Double valor) {

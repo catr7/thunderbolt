@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:text="nombre: "
+                    android:text="Estado: "
                     android:textSize="16sp"
                     android:textStyle="normal|bold" />
 
@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:text="Apellido: "
+                    android:text="Estructura: "
                     android:textSize="16sp"
                     android:textStyle="normal|bold" />
 
@@ -112,8 +112,8 @@
 
                 <ImageButton
                     android:id="@+id/imgBBorrarProyecto"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
                     android:layout_gravity="end"
                     android:layout_marginLeft="22dp"
                     android:layout_marginTop="8dp"

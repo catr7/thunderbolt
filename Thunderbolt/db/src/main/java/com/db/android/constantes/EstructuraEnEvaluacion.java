@@ -1,8 +1,5 @@
 package com.db.android.constantes;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by Andres y Jess on 23/11/2016.
  */
@@ -26,16 +23,5 @@ public enum EstructuraEnEvaluacion {
     }
     public Double getValor(){
         return valor;
-    }
-
-    public static Map<String, String[]> mapValuesEnum(){
-        Map<String, String[]> values= new HashMap<>();
-        for(EstructuraEnEvaluacion vEnum: EstructuraEnEvaluacion.values()){
-            String[] valuesEnum= new String[2];
-            valuesEnum[0]= vEnum.descripcion;
-            valuesEnum[1]= String.valueOf(vEnum.valor);
-            values.put(vEnum.name(), valuesEnum);
-        }
-        return values;
     }
 }

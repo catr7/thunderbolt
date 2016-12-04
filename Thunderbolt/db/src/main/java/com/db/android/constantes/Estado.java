@@ -8,6 +8,7 @@ import java.util.Map;
  */
 
 public enum Estado {
+
     ANZOATEGUI("Anzóategui",45),
     APURE("Apure",70),
     BOLIVAR("Bolívar",167),

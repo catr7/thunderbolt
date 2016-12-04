@@ -13,7 +13,6 @@ public enum EnrutamientoDeAcometida {
     SUBTERRANEO("Subterránea",0.5),
     ACOMETIDA_SUBTERRANEA("Acometidas subterráneas que se encuentran en su totalidad dentro de un sistema de puesta a tierra tipo malla.",0.01);
 
-
     private final String descripcion;
     private final Double valor;
     EnrutamientoDeAcometida(String descripcion, Double valor) {

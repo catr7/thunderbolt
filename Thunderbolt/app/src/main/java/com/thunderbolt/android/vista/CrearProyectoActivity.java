@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.db.android.constantes.Estado;
 import com.db.android.constantes.Estatus;
 import com.db.android.facade.ProyectoFacade;
@@ -22,6 +23,7 @@ import com.db.android.model.Usuario;
 import com.thunderbolt.android.R;
 import com.thunderbolt.android.vista.utils.CrearPDF;
 import com.thunderbolt.android.vista.utils.EnviarCorreo;
+
 import java.sql.SQLException;
 import java.util.Date;
 
@@ -31,14 +33,18 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
     private Usuario usuarioSeleccionado;
     private Proyecto proyectoNuevo;
     private ImageView imgBBuscarUsuario;
-    private TextView txtVUsuarioSeleccionado;
+    private TextView txtVBuscarUsuario;
+    private TextView txtVUsuarioNombreSeleccionado;
+    private TextView txtVnombreUsuarioEncontrado;
+    private TextView txtVCorreoUsuarioEncontrado;
+    private TextView txtVCorreoUsuarioSeleccionado;
     private EditText txtENombreEstructura;
     private EditText txtEPais;
     private EditText txtEDireccion;
     private Spinner spinnerEstado;
     private Button btnRealizarCalculos;
     private boolean editar;
-    private  ProyectoFacadeLocal proyectoFacadeLocal;
+    private ProyectoFacadeLocal proyectoFacadeLocal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,44 +53,46 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         Intent intent = getIntent();
 
         proyectoFacadeLocal = new ProyectoFacade();
+
+        txtVBuscarUsuario = (TextView) findViewById(R.id.txtVBuscarUsuario);
         txtENombreEstructura = (EditText) findViewById(R.id.TextENombreEstructuraProyecto);
         txtEPais = (EditText) findViewById(R.id.TextEPaisProyecto);
         txtEDireccion = (EditText) findViewById(R.id.TextEDireccionProyecto);
         imgBBuscarUsuario = (ImageView) findViewById(R.id.imgBBuscarUsuario);
         spinnerEstado = (Spinner) findViewById(R.id.spinnerEstado);
         btnRealizarCalculos = (Button) findViewById(R.id.btnRealizarCalculos);
-        txtVUsuarioSeleccionado = (TextView) findViewById(R.id.txtVUsuario);
-
+        txtVUsuarioNombreSeleccionado = (TextView) findViewById(R.id.txtVUsuarioNombreSeleccionado);
+        txtVCorreoUsuarioEncontrado = (TextView) findViewById(R.id.txtVCoreoUsuarioEncontrado);
+        txtVnombreUsuarioEncontrado = (TextView) findViewById(R.id.txtVnombreUsuarioEncontrado);
+        txtVCorreoUsuarioSeleccionado = (TextView) findViewById(R.id.txtVCorreoUsuarioSeleccionado);
         imgBBuscarUsuario.setOnClickListener(this);
         spinnerEstado.setAdapter(new ArrayAdapter<Estado>(this, android.R.layout.simple_spinner_item, Estado.values()));
         btnRealizarCalculos.setOnClickListener(this);
 
-        if (proyectoNuevo == null) {
-            if (intent.getExtras() != null && intent.getExtras().getSerializable("proyecto") != null) {
-                proyectoNuevo = (Proyecto) intent.getExtras().getSerializable("proyecto");
-                txtVUsuarioSeleccionado.setText(proyectoNuevo.getUsuario().getCorreo());
+
+        if (intent.getExtras() != null && intent.getExtras().getSerializable("proyecto") != null) {
+            proyectoNuevo = (Proyecto) intent.getExtras().getSerializable("proyecto");
                 txtENombreEstructura.setText(proyectoNuevo.getNombreEstructura());
-                txtENombreEstructura.setEnabled(false);
                 txtEPais.setText(proyectoNuevo.getPais());
                 txtEDireccion.setText(proyectoNuevo.getDireccion());
-                txtEDireccion.setEnabled(false);
+            if(proyectoNuevo.getEstado()!=null) {
                 spinnerEstado.setSelection(proyectoNuevo.getEstado().ordinal());
-                spinnerEstado.setEnabled(false);
-                imgBBuscarUsuario.setEnabled(false);
-                editar=false;
-            } else {
-                proyectoNuevo = new Proyecto();
-                proyectoNuevo.setFechaCreacion(new Date());
             }
+        } else {
+            proyectoNuevo = new Proyecto();
         }
         setToolbar();
-        if(intent.getExtras() != null && intent.getExtras().getBoolean("editar")){
-            habilitar(true);
+
+        if (intent.getExtras() != null) {
+            habilitar(intent.getExtras().getBoolean("editar"));
         }
         if (intent.getExtras() != null && intent.getExtras().getSerializable("usuario") != null) {
             usuarioSeleccionado = (Usuario) intent.getExtras().getSerializable("usuario");
+            cargarUsuario(usuarioSeleccionado);
             proyectoNuevo.setUsuario(usuarioSeleccionado);
-            txtVUsuarioSeleccionado.setText(usuarioSeleccionado.getCorreo());
+        } else if (proyectoNuevo.getUsuario() != null) {
+            usuarioSeleccionado = proyectoNuevo.getUsuario();
+            cargarUsuario(usuarioSeleccionado);
         }
 
     }
@@ -110,17 +118,56 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
 
     public void irAUsuarios() {
         Intent intentUsuarios = new Intent(this, UsuariosActivity.class);
+        proyectoNuevo.setEstado((Estado) spinnerEstado.getSelectedItem());
+        proyectoNuevo.setNombreEstructura(txtENombreEstructura.getText().toString());
+        proyectoNuevo.setPais(txtEPais.getText().toString());
+        proyectoNuevo.setDireccion(txtEDireccion.getText().toString());
         intentUsuarios.putExtra("proyecto", proyectoNuevo);
-        intentUsuarios.putExtra("editar",editar);
+        intentUsuarios.putExtra("editar", editar);
         startActivity(intentUsuarios);
+    }
+
+    public void cargarUsuario(Usuario usuario) {
+        String apellido = "";
+        if (editar) {
+            txtVBuscarUsuario.setVisibility(View.VISIBLE);
+            imgBBuscarUsuario.setVisibility(View.VISIBLE);
+
+        } else {
+            imgBBuscarUsuario.setVisibility(View.GONE);
+            txtVBuscarUsuario.setVisibility(View.GONE);
+        }
+
+        if (usuario.getNombre() != null && usuario.getNombre() != "") {
+            txtVnombreUsuarioEncontrado.setVisibility(View.VISIBLE);
+            txtVUsuarioNombreSeleccionado.setVisibility(View.VISIBLE);
+            if (usuario.getApellido() != null) {
+                apellido = usuario.getApellido();
+            }
+            txtVUsuarioNombreSeleccionado.setText(new StringBuilder().append(usuario.getNombre()).append(" ").append(apellido));
+        } else {
+            txtVnombreUsuarioEncontrado.setVisibility(View.GONE);
+            txtVUsuarioNombreSeleccionado.setVisibility(View.GONE);
+        }
+
+        if (usuario.getCorreo() != null || usuario.getCorreo() != "") {
+            txtVCorreoUsuarioEncontrado.setVisibility(View.VISIBLE);
+            txtVCorreoUsuarioSeleccionado.setText(usuario.getCorreo());
+        } else {
+            txtVCorreoUsuarioEncontrado.setVisibility(View.GONE);
+        }
+        if (btnRealizarCalculos.getText().equals("Crear Proyecto")) {
+            txtVBuscarUsuario.setVisibility(View.VISIBLE);
+            imgBBuscarUsuario.setVisibility(View.VISIBLE);
+        }
     }
 
     public void irARealizarCalculos() {
         if (spinnerEstado.getSelectedItem() != "" && proyectoNuevo.getUsuario() != null) {
-            if(proyectoNuevo.getEstatus()==null || editar==true) {
+            if (proyectoNuevo.getEstatus() == null || editar == true) {
                 guardarProyecto();
             }
-            if(btnRealizarCalculos.getText().toString().equalsIgnoreCase("Realizar Calculos")) {
+            if (btnRealizarCalculos.getText().toString().equalsIgnoreCase("Realizar Calculos")) {
                 Intent intentCalulos = new Intent(this, RealizarCalculosActivity.class);
                 intentCalulos.putExtra("proyecto", proyectoNuevo);
                 startActivity(intentCalulos);
@@ -131,7 +178,7 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    public void guardarProyecto(){
+    public void guardarProyecto() {
         try {
             proyectoNuevo.setEstado((Estado) spinnerEstado.getSelectedItem());
             proyectoNuevo.setNombreEstructura(txtENombreEstructura.getText().toString());
@@ -139,8 +186,8 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
             proyectoNuevo.setDireccion(txtEDireccion.getText().toString());
             proyectoNuevo.setEstatus(Estatus.EN_PROCESO);
             proyectoFacadeLocal.crear(proyectoNuevo);
-            if(editar){
-                editar=false;
+            if (editar) {
+                editar = false;
                 habilitar(false);
             }
         } catch (SQLException e) {
@@ -148,18 +195,17 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    public void habilitar(boolean activo){
-        editar=activo;
+    public void habilitar(boolean activo) {
+        editar = activo;
         txtENombreEstructura.setEnabled(activo);
         txtEDireccion.setEnabled(activo);
         spinnerEstado.setEnabled(activo);
-        imgBBuscarUsuario.setEnabled(activo);
-        if(editar) {
+        if (editar) {
             btnRealizarCalculos.setText("Editar Proyecto");
         }
     }
 
-    public void eliminar(){
+    public void eliminar() {
         try {
             proyectoFacadeLocal.eliminar(proyectoNuevo);
             onBackPressed();
@@ -173,7 +219,7 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            if (proyectoNuevo.getEstatus()!=null) {
+            if (proyectoNuevo.getEstatus() != null) {
                 ab.setTitle("Proyecto");
                 btnRealizarCalculos.setText("Realizar Calculos");
             } else {
@@ -184,11 +230,11 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void crearPdf(){
+    private void crearPdf() {
         CrearPDF.crear("catr.pdf");
-           }
+    }
 
-public void enviarCorreo() {
-    EnviarCorreo.enviar("carlosandrestorres30@gmail.com","pdfPrueba.pdf");
-}
+    public void enviarCorreo() {
+        EnviarCorreo.enviar("carlosandrestorres30@gmail.com", "pdfPrueba.pdf");
+    }
 }
