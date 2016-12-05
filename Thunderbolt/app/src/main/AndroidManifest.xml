@@ -26,7 +26,7 @@
             android:name=".vista.CrearProyectoActivity"
             android:noHistory="true" />
         <activity
-            android:name=".vista.GenericValues"
+            android:name=".vista.ListaDeEnums"
             android:noHistory="true" />
         <activity
             android:name=".vista.UsuariosActivity"

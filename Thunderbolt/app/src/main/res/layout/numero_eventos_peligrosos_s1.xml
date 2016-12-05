@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_margin="8dp"
-    android:layout_width="wrap_content"
+    android:id="@+id/toogleS1"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -49,6 +50,7 @@
             android:textStyle="normal|bold"
             android:gravity="center" />
         <TextView
+            android:id="@+id/ValorAnchoS1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
@@ -69,6 +71,7 @@
             android:textStyle="normal|bold"
             android:gravity="center" />
         <TextView
+            android:id="@+id/ValorAltoS1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
@@ -89,6 +92,7 @@
             android:textStyle="normal|bold"
             android:gravity="center" />
         <TextView
+            android:id="@+id/ValorLargoS1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
@@ -105,6 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="8dp"
         android:weightSum="1">
 
         <TextView
@@ -125,7 +130,8 @@
             android:layout_width="40dp"
             android:layout_height="35dp"
             android:layout_gravity="start"
-            app:srcCompat="@mipmap/ic_lenum" />
+            app:srcCompat="@mipmap/ic_lenum"
+            android:layout_marginLeft="14dp" />
 
     </LinearLayout>
 
@@ -136,23 +142,29 @@
         android:weightSum="1">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="235dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
             android:padding="8dp"
             android:text="La estructura está rodeada por estructuras más altas o por arboles"
             android:inputType="textMultiLine"
-            android:ems="15"
+            android:ems="14"
             android:textColor="@color/grisOscuro"
             android:textSize="14dp"
             android:textStyle="normal"
             android:gravity="left" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
-            android:padding="8dp"
             android:text="Valor:"
+            android:paddingTop="6dp"
             android:textColor="@color/grisOscuro"
             android:textSize="14dp"
             android:textStyle="normal|bold"
@@ -161,13 +173,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
-            android:padding="8dp"
+            android:padding="4dp"
             android:text="0.25"
             android:textColor="@color/grisOscuro"
             android:textSize="14dp"
             android:textStyle="normal"
             android:gravity="left" />
-
+</LinearLayout>
     </LinearLayout>
 
     <Button
@@ -181,5 +193,32 @@
         android:text="Cálcular"
         android:textColor="@android:color/white"
         android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:text="Resultado:"
+            android:paddingTop="8dp"
+            android:textColor="@color/grisOscuro"
+            android:textSize="14dp"
+            android:textStyle="normal|bold"
+            android:gravity="left" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:paddingTop="8dp"
+            android:text="0.25"
+            android:textColor="@color/grisOscuro"
+            android:textSize="14dp"
+            android:textStyle="normal"
+            android:gravity="left" />
+    </LinearLayout>
 
 </LinearLayout>

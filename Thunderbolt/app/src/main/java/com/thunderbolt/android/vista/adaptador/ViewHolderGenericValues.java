@@ -13,14 +13,12 @@ import com.thunderbolt.android.R;
 public class ViewHolderGenericValues extends RecyclerView.ViewHolder {
 
     CardView cv;
-    TextView tituloEnum;
     TextView valorEnum;
     TextView descripcionEnum;
 
     public ViewHolderGenericValues(View itemView) {
         super(itemView);
         cv = (CardView) itemView.findViewById(R.id.cvGenericValues);
-        tituloEnum = (TextView) itemView.findViewById(R.id.textViewTituloEnum);
         valorEnum= (TextView) itemView.findViewById(R.id.textViewValorEnum);
         descripcionEnum =(TextView) itemView.findViewById(R.id.textViewDescripcionEnum);
     }

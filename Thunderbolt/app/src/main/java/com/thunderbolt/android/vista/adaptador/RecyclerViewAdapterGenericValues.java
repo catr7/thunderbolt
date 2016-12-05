@@ -34,7 +34,6 @@ public class RecyclerViewAdapterGenericValues extends RecyclerView.Adapter<ViewH
 
     @Override
     public void onBindViewHolder(ViewHolderGenericValues holder, int position) {
-        holder.tituloEnum.setText(this.titulosEnum.get(position));
         holder.descripcionEnum.setText(this.enumSeleccionado.get(this.titulosEnum.get(position))[0]);
         holder.valorEnum.setText(this.enumSeleccionado.get(this.titulosEnum.get(position))[1]);
     }

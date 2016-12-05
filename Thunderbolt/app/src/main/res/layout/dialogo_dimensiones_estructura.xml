@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_container"
     android:orientation="vertical" >
@@ -15,23 +15,24 @@
         android:text="Dimensiones de la Estructura" />
 
     <View
-        android:id="@+id/divider"
-        android:layout_width="fill_parent"
-        android:layout_height="5dp"
-        android:layout_marginBottom="3dp"
-        android:layout_marginTop="3dp"
-        android:background="@drawable/dialog_divider" />
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="15px"
+        android:layout_marginRight="15px"
+        android:background="@color/verde" />
 
     <ScrollView
         android:id="@+id/cuerpo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="3.02">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="0.4"
             android:gravity="center">
 
             <LinearLayout
@@ -42,12 +43,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Largo (L):"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_margin="3dp" />
+                    android:textColor="@color/colorPrimary" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -72,35 +71,33 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="120dp"
-                android:layout_height="match_parent">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5">
 
-                <TextView
+                <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Small Text"
-                    android:id="@+id/textView"
-                    android:textSize="18dp"
-                    android:layout_margin="3dp" />
+                    android:id="@+id/largo"
+                    android:inputType="numberDecimal"
+                    android:textSize="16dp" />
 
-                <TextView
+                <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Small Text"
-                    android:id="@+id/textView5"
-                    android:textSize="18dp"
-                    android:layout_margin="3dp" />
+                    android:id="@+id/ancho"
+                    android:textSize="16dp" />
 
-                <TextView
+                <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Small Text"
-                    android:id="@+id/textView6"
-                    android:textSize="18dp"
-                    android:layout_margin="3dp" />
+                    android:id="@+id/alto"
+                    android:textSize="16dp" />
             </LinearLayout>
 
 
@@ -148,12 +145,13 @@
         android:layout_height="match_parent"
         android:padding="6dp">
         <Button
-            android:id="@+id/aceptar"
+            android:id="@+id/aceptarDimensiones"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/dialog_button_selector"
             android:text="@string/botonAceptar"
+            android:onClick="cerrarDialogoDimensiones"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:padding="10dp" />
