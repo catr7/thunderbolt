@@ -3,25 +3,27 @@ package com.db.android.model;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 /**
  * Created by Andres y Jess on 21/11/2016.
  */
 @DatabaseTable(tableName="dimensiones_estructura")
-public class DimensionesEstructura {
+public class DimensionesEstructura implements Serializable {
 
     @DatabaseField(generatedId = true, allowGeneratedIdInsert = true)
     private Long id;
     @DatabaseField
-    private float largo;
+    private Float largo;
     @DatabaseField
-    private float ancho;
+    private Float ancho;
     @DatabaseField
-    private float alto;
+    private Float alto;
 
     public DimensionesEstructura() {
     }
 
-    public DimensionesEstructura(Long id, float largo, float ancho, float alto) {
+    public DimensionesEstructura(Long id, Float largo, Float ancho, Float alto) {
         this.id = id;
         this.largo = largo;
         this.ancho = ancho;
@@ -36,27 +38,27 @@ public class DimensionesEstructura {
         this.id = id;
     }
 
-    public float getLargo() {
+    public Float getLargo() {
         return largo;
     }
 
-    public void setLargo(float largo) {
+    public void setLargo(Float largo) {
         this.largo = largo;
     }
 
-    public float getAncho() {
+    public Float getAncho() {
         return ancho;
     }
 
-    public void setAncho(float ancho) {
+    public void setAncho(Float ancho) {
         this.ancho = ancho;
     }
 
-    public float getAlto() {
+    public Float getAlto() {
         return alto;
     }
 
-    public void setAlto(float alto) {
+    public void setAlto(Float alto) {
         this.alto = alto;
     }
 }

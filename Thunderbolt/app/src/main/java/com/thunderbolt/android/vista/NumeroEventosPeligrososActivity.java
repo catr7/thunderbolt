@@ -1,5 +1,6 @@
 package com.thunderbolt.android.vista;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 import com.base.android.ContextProvider;
 import com.db.android.constantes.Ambiente;
 import com.db.android.constantes.EstructuraEnEvaluacion;
+import com.db.android.facade.ProyectoFacade;
+import com.db.android.facade.ProyectoFacadeLocal;
 import com.db.android.model.DimensionesEstructura;
 import com.db.android.model.NumeroEventosPeligorsos;
 import com.db.android.model.Proyecto;
@@ -27,6 +30,7 @@ import com.thunderbolt.android.R;
 import com.thunderbolt.android.vista.utils.EnumAdapter;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -47,19 +51,21 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
     private LinearLayout linearDimensionesS1;
     private LinearLayout expandibleS1;
     private LinearLayout linearLayoutS1;
+    private LinearLayout linearEstructuraEnEvaluacion;
     private ImageButton imgBDimensionS1;
     private LinearLayout linearLayoutS2;
     private LinearLayout linearLayoutS3;
     private LinearLayout linearLayoutS4;
+    private String calculo;
     private Dialog customDialog;
+    private ProyectoFacadeLocal proyectoFacadeLocal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numero_eventos_peligrosos);
         Intent intent = getIntent();
-
-
+        proyectoFacadeLocal= new ProyectoFacade();
 
         expandibleS1= (LinearLayout) findViewById(R.id.expandible_s1);
         linearLayoutS1= (LinearLayout) findViewById(R.id.toogleS1);
@@ -70,6 +76,8 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
         imgBEnumS1=(ImageButton) findViewById(R.id.imgBEnumS1);
         imageViewArrowS1=(ImageView) findViewById(R.id.imageViewArrowS1);
         linearDimensionesS1= (LinearLayout) findViewById(R.id.linearDimensionesS1);
+        linearEstructuraEnEvaluacion= (LinearLayout) findViewById(R.id.linearEstructuraEnEvaluacion);
+        linearEstructuraEnEvaluacion.setVisibility(View.GONE);
         linearDimensionesS1.setVisibility(View.GONE);
         //S1
 
@@ -82,9 +90,19 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
         //dialogo
         if (intent.getExtras() != null && intent.getExtras().getSerializable("proyecto") != null) {
             proyecto = (Proyecto) intent.getExtras().getSerializable("proyecto");
+            if(proyecto.getNumeroEventosPeligorsos()==null) {
+                proyecto.setNumeroEventosPeligorsos(new NumeroEventosPeligorsos());
+            }
+            if(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura()==null){
+            proyecto.getNumeroEventosPeligorsos().setDimensionesEstructura(new DimensionesEstructura());
         }
-        crearDialogoDimensiones();
+        }
+        if (intent.getExtras() != null && intent.getExtras().getString("calculo") != null) {
+            calculo=  intent.getExtras().getString("calculo");
+        }
+        abrirCalculo(calculo);
         setToolbar();
+
     }
 
 
@@ -108,14 +126,14 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
                 dialogoDimensiones();
                 break;
             case R.id.imgBEnumS1:{
-                listaDeEnum(EstructuraEnEvaluacion.mapValuesEnum(), EnumAdapter.enumKeysValues(EstructuraEnEvaluacion.values()));
+                listaDeEnum(EstructuraEnEvaluacion.mapValuesEnum(), EnumAdapter.enumKeysValues(EstructuraEnEvaluacion.values()),"EstructuraEnEvaluacion",this.getClass());
             }
         }
     }
 
     public void toggle_s1(){
         linearLayoutS1.setVisibility(linearLayoutS1.isShown()? View.GONE: View.VISIBLE);
-        imageViewArrowS1.setImageResource(linearLayoutS1.isShown()? R.mipmap.flecha_abajo:R.mipmap.flecha_arriba);
+        imageViewArrowS1.setImageResource(linearLayoutS1.isShown()?R.mipmap.flecha_arriba: R.mipmap.flecha_abajo);
     }
 
     public void dialogoDimensiones(){
@@ -136,13 +154,17 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
             {
               if(!alto.getText().toString().equals("") && !ancho.getText().toString().equals("") && !largo.getText().toString().equals("")  )
                   {
-                      proyecto.setNumeroEventosPeligorsos(new NumeroEventosPeligorsos());
-                      proyecto.getNumeroEventosPeligorsos().setDimensionesEstructura(new DimensionesEstructura());
+
                       proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura().setAlto(Float.valueOf(alto.getText().toString()));
                       proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura().setAncho(Float.valueOf(ancho.getText().toString()));
                       proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura().setLargo(Float.valueOf(largo.getText().toString()));
                       cargarDimensiones(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura());
                       linearDimensionesS1.setVisibility(View.VISIBLE);
+                      try {
+                          proyectoFacadeLocal.crear(proyecto);
+                      } catch (SQLException e) {
+                          e.printStackTrace();
+                      }
                       customDialog.dismiss();
                   }else{
                   Toast.makeText(ContextProvider.getContext(), "Debe llenar todos los campos", Toast.LENGTH_SHORT).show();
@@ -158,12 +180,38 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
         varlosAltoS1.setText(String.valueOf(dimensionesEstructura.getAlto()));
     }
 
-    public void listaDeEnum(Map<String, String[]> map, List<String> list){
+    public void cargarEstructuraEnEvaluacion(){
+        if(proyecto.getNumeroEventosPeligorsos().getEstructuraEnEvaluacion()!=null){
+
+        }
+
+    }
+
+    public void listaDeEnum(Map<String, String[]> map, List<String> list,String c, Class a ){
         Intent intentEnums = new Intent(this,ListaDeEnums.class);
-        intentEnums.putExtra("proyecto",proyecto);
+        intentEnums.putExtra("proyecto", proyecto);
         intentEnums.putExtra("enumSeleccionado", (Serializable) map);
         intentEnums.putExtra("titulosEnum", (Serializable) list);
+        intentEnums.putExtra("clase", c);
+        intentEnums.putExtra("actividad", (Serializable) a);
         startActivity(intentEnums);
+    }
+
+    public void abrirCalculo(String calculo){
+        if(calculo!=null){
+            switch (calculo){
+                case "s1":
+                    linearLayoutS1.setVisibility(View.VISIBLE);
+                    if(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura().getLargo()!=null) {
+                        cargarDimensiones(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura());
+                        linearDimensionesS1.setVisibility(View.VISIBLE);
+                    }
+                    crearDialogoDimensiones();
+                    cargarEstructuraEnEvaluacion();
+                    break;
+
+            }
+        }
     }
 }
 

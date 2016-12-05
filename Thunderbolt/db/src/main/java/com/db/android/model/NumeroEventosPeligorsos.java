@@ -8,11 +8,13 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 /**
  * Created by Andres y Jess on 21/11/2016.
  */
 @DatabaseTable(tableName="numeroEventosPeligrosos")
-public class NumeroEventosPeligorsos {
+public class NumeroEventosPeligorsos implements Serializable{
 
     @DatabaseField(generatedId = true, allowGeneratedIdInsert = true)
     private Long id;

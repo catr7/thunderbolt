@@ -10,8 +10,9 @@ import com.thunderbolt.android.R;
 /**
  * Created by Carlos Torres on 23/11/16.
  */
-public class ViewHolderGenericValues extends RecyclerView.ViewHolder {
+public class ViewHolderGenericValues extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
+    private ItemClickListener clickListener;
     CardView cv;
     TextView valorEnum;
     TextView descripcionEnum;
@@ -21,6 +22,23 @@ public class ViewHolderGenericValues extends RecyclerView.ViewHolder {
         cv = (CardView) itemView.findViewById(R.id.cvGenericValues);
         valorEnum= (TextView) itemView.findViewById(R.id.textViewValorEnum);
         descripcionEnum =(TextView) itemView.findViewById(R.id.textViewDescripcionEnum);
+        itemView.setOnClickListener(this);
+        itemView.setOnLongClickListener(this);
+    }
+
+    public void setClickListener(ItemClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        clickListener.onClick(v, getPosition(), false);
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        clickListener.onClick(v, getPosition(), true);
+        return  true;
     }
 }
 

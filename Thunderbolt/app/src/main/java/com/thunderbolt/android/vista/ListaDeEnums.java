@@ -1,5 +1,6 @@
 package com.thunderbolt.android.vista;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,8 @@ public class ListaDeEnums extends AppCompatActivity {
     private Map<String, String[]> enumSeleccionado = new HashMap<>();
     private List<String> titulosEnum = new ArrayList<>();
     private Proyecto proyecto;
+    private String c;
+    private Class a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +37,7 @@ public class ListaDeEnums extends AppCompatActivity {
         setToolbar();
         Intent intent = getIntent();
         if (intent.getExtras() != null && intent.getExtras().getSerializable("proyecto") != null) {
-            proyecto=(Proyecto)intent.getExtras().getSerializable("proyecto");
+            proyecto=(Proyecto) intent.getExtras().getSerializable("proyecto");
         }
         if (intent.getExtras() != null && intent.getExtras().getSerializable("enumSeleccionado") != null) {
             enumSeleccionado=(Map<String, String[]>) intent.getExtras().getSerializable("enumSeleccionado");
@@ -42,11 +45,16 @@ public class ListaDeEnums extends AppCompatActivity {
         if (intent.getExtras() != null && intent.getExtras().getSerializable("titulosEnum") != null) {
             titulosEnum= (List<String>) intent.getExtras().getSerializable("titulosEnum");
         }
-
+        if (intent.getExtras() != null && intent.getExtras().getString("clase") != null) {
+            c= intent.getExtras().getString("clase");
+        }
+        if (intent.getExtras() != null && intent.getExtras().getSerializable("actividad") != null) {
+            a= (Class) intent.getExtras().getSerializable("actividad");
+        }
         recyclerView = (RecyclerView) findViewById(R.id.listaValoresGenericos);
         manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
-        RecyclerViewAdapterGenericValues adaptador = new RecyclerViewAdapterGenericValues(enumSeleccionado, titulosEnum);
+        RecyclerViewAdapterGenericValues adaptador = new RecyclerViewAdapterGenericValues(enumSeleccionado, titulosEnum,proyecto,c,a);
         recyclerView.setAdapter(adaptador);
     }
 
