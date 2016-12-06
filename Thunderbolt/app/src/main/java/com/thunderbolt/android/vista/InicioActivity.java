@@ -17,6 +17,7 @@ import com.db.android.facade.ProyectoFacadeLocal;
 import com.db.android.model.Proyecto;
 import com.thunderbolt.android.R;
 import com.thunderbolt.android.vista.adaptador.RecyclerViewAdapterProyectos;
+import com.thunderbolt.android.vista.utils.CrearPDF;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
         setToolbar();
+
         recyclerView = (RecyclerView) findViewById(R.id.listaProyectos);
         List<Proyecto> proyectos= new ArrayList<>();
         ProyectoFacadeLocal proyectoFacadeLocal = new ProyectoFacade();
@@ -53,6 +55,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btnNuevoProyecto:
                 Intent intent= new Intent(this,CrearProyectoActivity.class);
                 intent.putExtra("editar",true);
+                intent.putExtra("crear",true);
                 startActivity(intent);
                 break;
         }

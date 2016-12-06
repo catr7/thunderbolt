@@ -95,6 +95,11 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
             cargarUsuario(usuarioSeleccionado);
         }
 
+        if (intent.getExtras() != null && intent.getExtras().getBoolean("crear")) {
+            habilitar(intent.getExtras().getBoolean("crear"));
+            btnRealizarCalculos.setText("Crear Proyecto");
+        }
+
     }
 
     @Override
@@ -230,11 +235,4 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void crearPdf() {
-        CrearPDF.crear("catr.pdf");
-    }
-
-    public void enviarCorreo() {
-        EnviarCorreo.enviar("carlosandrestorres30@gmail.com", "pdfPrueba.pdf");
-    }
 }

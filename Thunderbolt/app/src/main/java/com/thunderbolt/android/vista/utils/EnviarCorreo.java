@@ -15,9 +15,9 @@ public class EnviarCorreo {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{correo});
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Calculos del impacto.");
-        intent.putExtra(Intent.EXTRA_TEXT, "A continuacion se adjunta pdf con los resultados de los calculos del impacto en la estructura.");
-        intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(new StringBuilder().append("file://").append(Environment.getExternalStorageDirectory()).append("/").append(nombrePDF).toString()));
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Evaluacion de nivel de riesgo.");
+        intent.putExtra(Intent.EXTRA_TEXT, "A continuacion se adjunta informe final de resultados.");
+        intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(new StringBuilder().append("file://").append(Environment.getExternalStorageDirectory()).append("/").append(nombrePDF).append(".pdf").toString()));
         try {
            ContextProvider.getContext().startActivity(Intent.createChooser(intent, "Enviar Correo con:").setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         } catch (android.content.ActivityNotFoundException ex) {

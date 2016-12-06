@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 
 import com.base.android.ContextProvider;
+import com.db.android.model.DimensionesEstructura;
+import com.db.android.model.NumeroEventosPeligorsos;
 import com.db.android.model.Proyecto;
 import com.db.android.model.Usuario;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -28,6 +30,8 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
 
     private Dao<Usuario, Integer> usuarioDao;
     private Dao<Proyecto, Integer> proyectoDao;
+    private Dao<DimensionesEstructura, Integer> dimensionesEstructurasDao;
+    private Dao<NumeroEventosPeligorsos, Integer> numeroEventosPeligorsosesDao;
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_SCHEME_VERSION);
@@ -38,6 +42,8 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.createTable(connectionSource, Usuario.class);
             TableUtils.createTable(connectionSource, Proyecto.class);
+            TableUtils.createTable(connectionSource, DimensionesEstructura.class);
+            TableUtils.createTable(connectionSource, NumeroEventosPeligorsos.class);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -60,6 +66,20 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
             proyectoDao= getDao(Proyecto.class);
         }
         return proyectoDao;
+    }
+
+    public Dao<DimensionesEstructura, Integer> getDimensionesEstructurasDao() throws SQLException{
+        if(dimensionesEstructurasDao==null){
+            dimensionesEstructurasDao= getDao(DimensionesEstructura.class);
+        }
+        return dimensionesEstructurasDao;
+    }
+
+    public Dao<NumeroEventosPeligorsos, Integer> getNumeroEventosPeligorsosesDao() throws SQLException{
+        if(numeroEventosPeligorsosesDao==null){
+            numeroEventosPeligorsosesDao= getDao(NumeroEventosPeligorsos.class);
+        }
+        return numeroEventosPeligorsosesDao;
     }
 
     public DBHelper getHelper()  {

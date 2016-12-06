@@ -33,13 +33,15 @@ public class Proyecto implements Serializable {
     private Estatus estatus;
     @DatabaseField(foreign = true, foreignAutoCreate = true , foreignAutoRefresh = true, columnName = "fk_numero_eventos_peligrosos")
     private  NumeroEventosPeligorsos numeroEventosPeligorsos;
+    @DatabaseField
+    private String nombrePDF;
 
 
 
     public  Proyecto(){
     }
 
-    public Proyecto(Long id, String nombreEstructura, String pais, Estado estado, String direccion, Usuario usuario, Date fechaCreacion, Estatus estatus, NumeroEventosPeligorsos numeroEventosPeligorsos) {
+    public Proyecto(Long id, String nombreEstructura, String pais, Estado estado, String direccion, Usuario usuario, Date fechaCreacion, Estatus estatus, NumeroEventosPeligorsos numeroEventosPeligorsos,String nombrePDF) {
         this.id = id;
         this.nombreEstructura = nombreEstructura;
         this.pais = pais;
@@ -49,6 +51,7 @@ public class Proyecto implements Serializable {
         this.fechaCreacion = fechaCreacion;
         this.estatus = estatus;
         this.numeroEventosPeligorsos = numeroEventosPeligorsos;
+        this.nombrePDF=nombrePDF;
     }
 
     public Long getId() {
@@ -121,5 +124,13 @@ public class Proyecto implements Serializable {
 
     public void setNumeroEventosPeligorsos(NumeroEventosPeligorsos numeroEventosPeligorsos) {
         this.numeroEventosPeligorsos = numeroEventosPeligorsos;
+    }
+
+    public String getNombrePDF() {
+        return nombrePDF;
+    }
+
+    public void setNombrePDF(String nombrePDF) {
+        this.nombrePDF = nombrePDF;
     }
 }

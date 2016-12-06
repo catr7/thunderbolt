@@ -43,6 +43,8 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
     private TextView varlosAnchoS1;
     private TextView varlosAltoS1;
     private TextView valorLargoS1;
+    private TextView estructuraEnEvaluacionDescripcion;
+    private TextView estructuraEnEvaluacionValor;
     private ImageButton imgBEnumS1;
     private ImageView imageViewArrowS1;
     private TextView varlosAnchoS2;
@@ -77,6 +79,8 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
         imageViewArrowS1=(ImageView) findViewById(R.id.imageViewArrowS1);
         linearDimensionesS1= (LinearLayout) findViewById(R.id.linearDimensionesS1);
         linearEstructuraEnEvaluacion= (LinearLayout) findViewById(R.id.linearEstructuraEnEvaluacion);
+        estructuraEnEvaluacionDescripcion= (TextView) findViewById(R.id.estructuraEnEvaluacionDescripcion);
+        estructuraEnEvaluacionValor= (TextView) findViewById(R.id.estructuraEnEvaluacionValor);
         linearEstructuraEnEvaluacion.setVisibility(View.GONE);
         linearDimensionesS1.setVisibility(View.GONE);
         //S1
@@ -96,11 +100,20 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
             if(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura()==null){
             proyecto.getNumeroEventosPeligorsos().setDimensionesEstructura(new DimensionesEstructura());
         }
+            try {
+                proyectoFacadeLocal.crear(proyecto);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         if (intent.getExtras() != null && intent.getExtras().getString("calculo") != null) {
             calculo=  intent.getExtras().getString("calculo");
         }
+        crearDialogoDimensiones();
+        cargarEstructuraEnEvaluacion();
+        cargarDimensiones(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura());
         abrirCalculo(calculo);
+
         setToolbar();
 
     }
@@ -175,14 +188,19 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
     }
 
     public void cargarDimensiones(DimensionesEstructura dimensionesEstructura){
-        valorLargoS1.setText(String.valueOf(dimensionesEstructura.getLargo()));
-        varlosAnchoS1.setText(String.valueOf(dimensionesEstructura.getAncho()));
-        varlosAltoS1.setText(String.valueOf(dimensionesEstructura.getAlto()));
+        if(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura().getLargo()!=null) {
+            valorLargoS1.setText(String.valueOf(dimensionesEstructura.getLargo()));
+            varlosAnchoS1.setText(String.valueOf(dimensionesEstructura.getAncho()));
+            varlosAltoS1.setText(String.valueOf(dimensionesEstructura.getAlto()));
+            linearDimensionesS1.setVisibility(View.VISIBLE);
+        }
     }
 
     public void cargarEstructuraEnEvaluacion(){
         if(proyecto.getNumeroEventosPeligorsos().getEstructuraEnEvaluacion()!=null){
-
+            estructuraEnEvaluacionDescripcion.setText(proyecto.getNumeroEventosPeligorsos().getEstructuraEnEvaluacion().getdescripcion());
+            estructuraEnEvaluacionValor.setText(proyecto.getNumeroEventosPeligorsos().getEstructuraEnEvaluacion().getValor().toString());
+            linearEstructuraEnEvaluacion.setVisibility(View.VISIBLE);
         }
 
     }
@@ -202,12 +220,6 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
             switch (calculo){
                 case "s1":
                     linearLayoutS1.setVisibility(View.VISIBLE);
-                    if(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura().getLargo()!=null) {
-                        cargarDimensiones(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura());
-                        linearDimensionesS1.setVisibility(View.VISIBLE);
-                    }
-                    crearDialogoDimensiones();
-                    cargarEstructuraEnEvaluacion();
                     break;
 
             }
