@@ -27,13 +27,6 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(String nombre,String apellido, String correo, String direccion, String telefono) {
-        this.nombre = nombre;
-        this.apellido= apellido;
-        this.correo = correo;
-        this.direccion = direccion;
-        this.telefono = telefono;
-    }
 
     public Long getId() {
         return id;

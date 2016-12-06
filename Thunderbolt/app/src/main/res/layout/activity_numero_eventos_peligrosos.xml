@@ -98,6 +98,7 @@
                 android:layout_marginRight="15px"
                 android:background="@color/verde" />
         <LinearLayout
+            android:id="@+id/expandible_s2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#cccccc"
@@ -125,6 +126,7 @@
                     android:textStyle="normal|bold" />
 
                 <ImageView
+                    android:id="@+id/imageViewArrowS2"
                     android:layout_gravity="center"
                     android:layout_marginRight="4dp"
                     android:layout_width="30dp"
@@ -163,6 +165,8 @@
                 android:layout_marginRight="15px"
                 android:background="@color/verde" />
             </LinearLayout>
+            <include
+                layout="@layout/numero_eventos_peligrosos_s2" />
             //linaer S2
 
         <LinearLayout
@@ -170,8 +174,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
-            android:onClick="toggle_S3"
             android:orientation="vertical">
+            <!--android:onClick="toggle_S3"-->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -238,8 +243,8 @@
             android:layout_height="match_parent"
             android:background="#cccccc"
             android:clickable="true"
-            android:onClick="toggle_S4"
             android:orientation="vertical">
+            <!--android:onClick="toggle_S4"-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

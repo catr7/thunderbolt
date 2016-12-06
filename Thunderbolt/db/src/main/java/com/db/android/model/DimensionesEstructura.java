@@ -23,12 +23,6 @@ public class DimensionesEstructura implements Serializable {
     public DimensionesEstructura() {
     }
 
-    public DimensionesEstructura(Long id, Float largo, Float ancho, Float alto) {
-        this.id = id;
-        this.largo = largo;
-        this.ancho = ancho;
-        this.alto = alto;
-    }
 
     public Long getId() {
         return id;

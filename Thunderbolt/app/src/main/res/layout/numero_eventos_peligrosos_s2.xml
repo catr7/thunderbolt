@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/toogleS2"
+    android:layout_margin="8dp"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linearDimensionesS2"
+        android:weightSum="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:padding="8dp"
+            android:text="Ancho: "
+            android:textColor="@color/grisOscuro"
+            android:textSize="14dp"
+            android:textStyle="normal|bold"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/ValorAnchoS2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:padding="8dp"
+            android:text="70"
+            android:textColor="@color/grisOscuro"
+            android:textSize="14dp"
+            android:textStyle="normal"
+            android:gravity="center" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:padding="8dp"
+            android:text="Largo: "
+            android:textColor="@color/grisOscuro"
+            android:textSize="14dp"
+            android:textStyle="normal|bold"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/ValorLargoS2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:padding="8dp"
+            android:text="3"
+            android:textColor="@color/grisOscuro"
+            android:textSize="14dp"
+            android:textStyle="normal"
+            android:gravity="center" />
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnCalcularS2"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/boton_crear"
+        android:text="Cálcular"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
 
 </LinearLayout>

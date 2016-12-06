@@ -27,7 +27,7 @@ public class Calculos {
         return (dimension.getLargo()*dimension.getAncho())+2*(500*dimension.getLargo())*3.1416*Math.pow(500,2);
     }
 
-    public static Double nm(Double estado,DimensionesEstructura dimension){
-        return ng(estado)*am(dimension)*Math.pow(10,-6);
+    public static Double nm(Proyecto proyecto){
+        return ng((double) proyecto.getEstado().getValor())*am(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura())*Math.pow(10,-6);
     }
 }

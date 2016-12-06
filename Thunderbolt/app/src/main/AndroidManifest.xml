@@ -36,8 +36,9 @@
         <activity
             android:name=".vista.CrearUsuarioActivity"
             android:noHistory="true" />
-        <activity android:name=".vista.RealizarCalculosActivity">
-            android:noHistory="true"
+        <activity android:name=".vista.RealizarCalculosActivity"
+            android:noHistory="true">
+
         </activity>
         <activity android:name=".vista.NumeroEventosPeligrososActivity"
             android:noHistory="true"></activity>

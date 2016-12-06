@@ -41,19 +41,6 @@ public class Proyecto implements Serializable {
     public  Proyecto(){
     }
 
-    public Proyecto(Long id, String nombreEstructura, String pais, Estado estado, String direccion, Usuario usuario, Date fechaCreacion, Estatus estatus, NumeroEventosPeligorsos numeroEventosPeligorsos,String nombrePDF) {
-        this.id = id;
-        this.nombreEstructura = nombreEstructura;
-        this.pais = pais;
-        this.estado = estado;
-        this.direccion = direccion;
-        this.usuario = usuario;
-        this.fechaCreacion = fechaCreacion;
-        this.estatus = estatus;
-        this.numeroEventosPeligorsos = numeroEventosPeligorsos;
-        this.nombrePDF=nombrePDF;
-    }
-
     public Long getId() {
         return id;
     }
