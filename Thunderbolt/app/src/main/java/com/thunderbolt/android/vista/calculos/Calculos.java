@@ -3,6 +3,7 @@ package com.thunderbolt.android.vista.calculos;
 import android.support.annotation.Dimension;
 
 import com.db.android.model.DimensionesEstructura;
+import com.db.android.model.Proyecto;
 
 /**
  * Created by Andres y Jess on 23/11/2016.
@@ -18,8 +19,8 @@ public class Calculos {
         return  0.1*valor;
     }
 
-    public static Double nd(DimensionesEstructura dimension, Double estado,Double estructuraEnEvaluacion){
-        return ng(estado)*s1AD(dimension)*estructuraEnEvaluacion* Math.pow(10, -6);
+    public static Double nd(Proyecto proyecto){
+        return ng((double) proyecto.getEstado().getValor())*s1AD(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura())*proyecto.getNumeroEventosPeligorsos().getEstructuraEnEvaluacion().getValor()* Math.pow(10, -6);
     }
 
     public static Double am(DimensionesEstructura dimension){

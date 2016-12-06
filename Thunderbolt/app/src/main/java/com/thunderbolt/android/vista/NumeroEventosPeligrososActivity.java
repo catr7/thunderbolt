@@ -27,6 +27,7 @@ import com.db.android.model.DimensionesEstructura;
 import com.db.android.model.NumeroEventosPeligorsos;
 import com.db.android.model.Proyecto;
 import com.thunderbolt.android.R;
+import com.thunderbolt.android.vista.calculos.Calculos;
 import com.thunderbolt.android.vista.utils.EnumAdapter;
 
 import java.io.Serializable;
@@ -61,6 +62,7 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
     private String calculo;
     private Dialog customDialog;
     private ProyectoFacadeLocal proyectoFacadeLocal;
+    private Button btnCalcularS1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,10 +83,11 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
         linearEstructuraEnEvaluacion= (LinearLayout) findViewById(R.id.linearEstructuraEnEvaluacion);
         estructuraEnEvaluacionDescripcion= (TextView) findViewById(R.id.estructuraEnEvaluacionDescripcion);
         estructuraEnEvaluacionValor= (TextView) findViewById(R.id.estructuraEnEvaluacionValor);
+        btnCalcularS1= (Button) findViewById(R.id.btnCalcularS1);
         linearEstructuraEnEvaluacion.setVisibility(View.GONE);
         linearDimensionesS1.setVisibility(View.GONE);
         //S1
-
+         btnCalcularS1.setOnClickListener(this);
         imgBDimensionS1.setOnClickListener(this);
         expandibleS1.setOnClickListener(this);
         imgBEnumS1.setOnClickListener(this);
@@ -100,11 +103,7 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
             if(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura()==null){
             proyecto.getNumeroEventosPeligorsos().setDimensionesEstructura(new DimensionesEstructura());
         }
-            try {
-                proyectoFacadeLocal.crear(proyecto);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+
         }
         if (intent.getExtras() != null && intent.getExtras().getString("calculo") != null) {
             calculo=  intent.getExtras().getString("calculo");
@@ -138,9 +137,16 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
             case R.id.imgBDimensionEstructura:
                 dialogoDimensiones();
                 break;
-            case R.id.imgBEnumS1:{
+            case R.id.imgBEnumS1:
                 listaDeEnum(EstructuraEnEvaluacion.mapValuesEnum(), EnumAdapter.enumKeysValues(EstructuraEnEvaluacion.values()),"EstructuraEnEvaluacion",this.getClass());
-            }
+                break;
+
+            case R.id.btnCalcularS1:
+                Double res=  Calculos.nd(proyecto);
+                btnCalcularS1.setText(res.toString());
+                btnCalcularS1.setEnabled(false);
+                break;
+
         }
     }
 

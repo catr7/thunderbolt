@@ -186,7 +186,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnRealizarCalculos"
+        android:id="@+id/btnCalcularS1"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
@@ -197,31 +197,5 @@
         android:textColor="@android:color/white"
         android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center"
-            android:text="Resultado:"
-            android:paddingTop="8dp"
-            android:textColor="@color/grisOscuro"
-            android:textSize="14dp"
-            android:textStyle="normal|bold"
-            android:gravity="left" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center"
-            android:paddingTop="8dp"
-            android:text="0.25"
-            android:textColor="@color/grisOscuro"
-            android:textSize="14dp"
-            android:textStyle="normal"
-            android:gravity="left" />
-    </LinearLayout>
 
 </LinearLayout>
