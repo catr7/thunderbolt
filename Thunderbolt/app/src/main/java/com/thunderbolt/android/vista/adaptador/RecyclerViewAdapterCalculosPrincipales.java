@@ -64,12 +64,14 @@ public class RecyclerViewAdapterCalculosPrincipales extends RecyclerView.Adapter
                     }
                 });
                 break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
+            default: holder.setClickListener(new ItemClickListener() {
+                @Override
+                public void onClick(View view, int position, boolean isLongClick) {
+                    if (isLongClick) {
+                        //aca se puede colocar un dialogo para elimar
+                    } else {
+
+                    }}});
         }
 
     }
