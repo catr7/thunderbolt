@@ -42,52 +42,28 @@ import java.util.Map;
 public class NumeroEventosPeligrososActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Proyecto proyecto;
-    private EditText largo;
-    private EditText ancho;
-    private EditText alto;
-    private TextView varlosAnchoS1;
-    private TextView varlosAltoS1;
-    private TextView valorLargoS1;
-    private TextView estructuraEnEvaluacionDescripcion;
-    private TextView estructuraEnEvaluacionValor;
-    private ImageButton imgBEnumS1;
-    private ImageView imgVEstatusS1;
-    private ImageView imgVEstatusS2;
-    private ImageView imageViewArrowS1;
-    private ImageView imageViewArrowS2;
-    private TextView varlosAnchoS2;
-    private TextView valorLargoS2;
-    private LinearLayout linearDimensionesS1;
-    private LinearLayout expandibleS1;
-    private LinearLayout expandibleS2;
-    private LinearLayout linearLayoutS1;
-    private LinearLayout linearEstructuraEnEvaluacion;
-    private ImageButton imgBDimensionS1;
-    private LinearLayout linearLayoutS2;
-    private LinearLayout linearLayoutS3;
-    private LinearLayout linearLayoutS4;
     private String calculo;
     private Dialog customDialog;
+    private EditText largo,ancho,alto;
+    private TextView varlosAnchoS1,varlosAltoS1,valorLargoS1,estructuraEnEvaluacionDescripcion,estructuraEnEvaluacionValor,varlosAnchoS2,valorLargoS2;
+    private ImageButton imgBEnumS1,imgBDimensionS1;;
+    private ImageView imgVEstatusS1,imgVEstatusS2,imageViewArrowS1,imageViewArrowS2;
+    private LinearLayout linearDimensionesS1,expandibleS1,expandibleS2,linearLayoutS1,linearLayoutS2,linearLayoutS3,linearLayoutS4,linearEstructuraEnEvaluacion;
+    private Button btnCalcularS1,btnCalcularS2,btnCalcularS3,btnCalcularS4;
     private ProyectoFacadeLocal proyectoFacadeLocal;
     private DimensionFacadeLocal dimensionFacadeLocal;
     private NumeroEventosPeligrososFacadeLocal numeroEventosPeligrososFacadeLocal;
-    private Button btnCalcularS1;
-    private Button btnCalcularS2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numero_eventos_peligrosos);
         Intent intent = getIntent();
+
         instanciar();
-        btnCalcularS1.setOnClickListener(this);
-        btnCalcularS2.setOnClickListener(this);
-        imgBDimensionS1.setOnClickListener(this);
-        expandibleS1.setOnClickListener(this);
-        expandibleS2.setOnClickListener(this);
-        imgBEnumS1.setOnClickListener(this);
-        linearLayoutS1.setVisibility(View.GONE);
-        linearLayoutS2.setVisibility(View.GONE);
+        inicializar();
+
         if (intent.getExtras() != null && intent.getExtras().getSerializable("proyecto") != null) {
             proyecto = (Proyecto) intent.getExtras().getSerializable("proyecto");
             if (proyecto.getNumeroEventosPeligorsos() == null) {
@@ -108,7 +84,6 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
         abrirCalculo(calculo);
         cargarEstatus();
         setToolbar();
-
     }
 
     @Override
@@ -321,6 +296,17 @@ public void reinicarCalculoS1yS2(boolean dimension) {
         btnCalcularS2 = (Button) findViewById(R.id.btnCalcularS2);
         linearEstructuraEnEvaluacion.setVisibility(View.GONE);
         linearDimensionesS1.setVisibility(View.GONE);
+    }
+
+    public void inicializar(){
+        btnCalcularS1.setOnClickListener(this);
+        btnCalcularS2.setOnClickListener(this);
+        imgBDimensionS1.setOnClickListener(this);
+        expandibleS1.setOnClickListener(this);
+        expandibleS2.setOnClickListener(this);
+        imgBEnumS1.setOnClickListener(this);
+        linearLayoutS1.setVisibility(View.GONE);
+        linearLayoutS2.setVisibility(View.GONE);
     }
 }
 
