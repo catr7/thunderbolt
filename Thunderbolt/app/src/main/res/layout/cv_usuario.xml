@@ -11,7 +11,7 @@
     android:padding="3dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:orientation="horizontal">
@@ -20,7 +20,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="0.2"
+        android:layout_weight="0.01"
         android:orientation="vertical">
 
             <TextView
@@ -76,7 +76,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.7"
+            android:layout_weight="0.99"
             android:orientation="vertical">
 
             <TextView
@@ -128,29 +128,27 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="37dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.1"
             android:layout_gravity="end"
             android:gravity="end"
             android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/imgBEditarUsuario"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginLeft="22dp"
                 android:layout_marginTop="16dp"
                 android:layout_gravity="end"
-                app:srcCompat="@mipmap/ic_editar" />
+                app:srcCompat="@mipmap/ic_editar"
+                android:background="@color/windowBackground"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
 
             <ImageButton
                 android:id="@+id/imgBBorrarUsuario"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginLeft="22dp"
                 android:layout_marginTop="26dp"
+                android:background="@color/windowBackground"
                 android:layout_gravity="end"
                 app:srcCompat="@mipmap/ic_borrar" />
         </LinearLayout>
