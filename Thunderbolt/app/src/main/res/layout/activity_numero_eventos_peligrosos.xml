@@ -82,19 +82,18 @@
                     app:srcCompat="@mipmap/estatus_incompleto" />
 
             </LinearLayout>
-
-            </LinearLayout>
-            <include
-                layout="@layout/numero_eventos_peligrosos_s1" />
-            //linear de S1
-
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:background="@color/verde" />
+                android:background="@color/verde"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp" />
+            </LinearLayout>
+            <include
+                layout="@layout/numero_eventos_peligrosos_s1" />
+            //linear de S1
         <LinearLayout
             android:id="@+id/expandible_s2"
             android:layout_width="match_parent"
@@ -159,7 +158,9 @@
                 android:layout_height="2dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:background="@color/verde" />
+                android:background="@color/verde"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp" />
             </LinearLayout>
             <include
                 layout="@layout/numero_eventos_peligrosos_s2" />
@@ -228,7 +229,9 @@
                 android:layout_height="2dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:background="@color/verde" />
+                android:background="@color/verde"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp" />
             </LinearLayout>
             //linear S3
 
