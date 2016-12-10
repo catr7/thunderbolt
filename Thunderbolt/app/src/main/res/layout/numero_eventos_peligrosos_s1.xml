@@ -28,12 +28,12 @@
 
         <ImageButton
             android:id="@+id/imgBDimensionEstructura"
-            android:layout_width="36dp"
-            android:layout_height="35dp"
             android:layout_gravity="start"
             android:background="#ffffff"
-            app:srcCompat="@android:drawable/ic_search_category_default"
-            android:layout_weight="0.02" />
+            android:src="@mipmap/ic_buscar"
+            android:layout_weight="0.02"
+            android:layout_width="30dp"
+            android:layout_height="31dp" />
 
     </LinearLayout>
 
@@ -134,12 +134,12 @@
 
         <ImageButton
             android:id="@+id/imgBEnumS1"
-            android:layout_width="40dp"
-            android:layout_height="35dp"
             android:layout_gravity="start"
             android:background="#ffffff"
-            app:srcCompat="@android:drawable/ic_search_category_default"
-            android:layout_weight="0.001" />
+            android:src="@mipmap/ic_buscar"
+            android:layout_weight="0.02"
+            android:layout_width="30dp"
+            android:layout_height="31dp" />
 
     </LinearLayout>
 
@@ -198,7 +198,7 @@
 
     <Button
         android:id="@+id/btnCalcularS1"
-        android:layout_width="260dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
         android:gravity="center"
