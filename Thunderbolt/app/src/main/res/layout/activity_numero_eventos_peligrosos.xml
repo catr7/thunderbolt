@@ -25,7 +25,7 @@
             android:id="@+id/expandible_s1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#cccccc"
+            android:background="@color/windowBackground"
             android:clickable="true"
             android:onClick="toggle_S1"
             android:orientation="vertical">
@@ -101,7 +101,7 @@
             android:id="@+id/expandible_s2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#cccccc"
+            android:background="@color/windowBackground"
             android:clickable="true"
             android:onClick="toggle_S2"
             android:orientation="vertical">
@@ -170,7 +170,7 @@
             //linaer S2
 
         <LinearLayout
-            android:background="#cccccc"
+            android:background="@color/windowBackground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
@@ -232,16 +232,14 @@
                 android:layout_height="2dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginLeft="15px"
-                android:layout_marginRight="15px"
-                android:background="@color/verde" />
+                android:background="@color/grisOscuro" />
             </LinearLayout>
             //linear S3
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#cccccc"
+            android:background="@color/windowBackground"
             android:clickable="true"
             android:orientation="vertical">
             <!--android:onClick="toggle_S4"-->
