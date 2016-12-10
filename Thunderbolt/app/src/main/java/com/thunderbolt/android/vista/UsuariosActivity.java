@@ -23,7 +23,7 @@ import java.util.List;
 
 public class UsuariosActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private boolean editar;
+    private boolean editar, crear;
     private Proyecto proyecto;
     private RecyclerView.LayoutManager manager;
     private RecyclerView recyclerView;
@@ -48,7 +48,10 @@ public class UsuariosActivity extends AppCompatActivity implements View.OnClickL
         if(intent.getExtras() != null && intent.getExtras().getBoolean("editar")){
            editar=true;
         }
-        RecyclerViewAdapterUsuarios adaptador = new RecyclerViewAdapterUsuarios(usuarios,proyecto,editar);
+        if (intent.getExtras() != null && intent.getExtras().getBoolean("crear")) {
+            crear=intent.getExtras().getBoolean("crear");
+         }
+        RecyclerViewAdapterUsuarios adaptador = new RecyclerViewAdapterUsuarios(usuarios,proyecto,editar,crear);
         manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adaptador);
@@ -75,6 +78,7 @@ public class UsuariosActivity extends AppCompatActivity implements View.OnClickL
                 Intent intent= new Intent(this,CrearUsuarioActivity.class);
                 intent.putExtra("proyecto",proyecto);
                 intent.putExtra("editar",editar);
+                intent.putExtra("crear",crear);
                 startActivity(intent);
                 break;
         }
@@ -91,6 +95,7 @@ public class UsuariosActivity extends AppCompatActivity implements View.OnClickL
         Intent intent= new Intent(this,CrearProyectoActivity.class);
         intent.putExtra("proyecto",proyecto);
         intent.putExtra("editar",editar);
+        intent.putExtra("crear",crear);
         startActivity(intent);
     }
 }

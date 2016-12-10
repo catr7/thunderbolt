@@ -27,12 +27,13 @@ import java.util.List;
 public class RecyclerViewAdapterUsuarios extends RecyclerView.Adapter<ViewHolderUsuario> implements View.OnClickListener {
     private List<Usuario> usuarios;
     private Proyecto proyecto;
-    private boolean editar;
+    private boolean editar, crear;
 
-    public RecyclerViewAdapterUsuarios(List<Usuario> usuarios, Proyecto proyecto, boolean editar) {
+    public RecyclerViewAdapterUsuarios(List<Usuario> usuarios, Proyecto proyecto, boolean editar,boolean crear) {
         this.usuarios = usuarios;
         this.proyecto = proyecto;
         this.editar= editar;
+        this.crear=crear;
     }
     private UsuarioFacadeLocal usuarioFacadeLocal;
     private int posicion;
@@ -64,6 +65,7 @@ public class RecyclerViewAdapterUsuarios extends RecyclerView.Adapter<ViewHolder
                     intent.putExtra("usuario",usuarios.get(position));
                     intent.putExtra("proyecto",proyecto);
                     intent.putExtra("editar",editar);
+                    intent.putExtra("crear",crear);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     ContextProvider.getContext().startActivity(intent);
                     }
@@ -85,6 +87,7 @@ public class RecyclerViewAdapterUsuarios extends RecyclerView.Adapter<ViewHolder
                 intent.putExtra("usuario",usuarios.get(posicion));
                 intent.putExtra("proyecto",proyecto);
                 intent.putExtra("editar",editar);
+                intent.putExtra("crear",crear);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 ContextProvider.getContext().startActivity(intent);
                 break;

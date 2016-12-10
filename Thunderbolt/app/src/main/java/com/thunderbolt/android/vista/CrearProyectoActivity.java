@@ -43,7 +43,7 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
     private EditText txtEDireccion;
     private Spinner spinnerEstado;
     private Button btnRealizarCalculos;
-    private boolean editar;
+    private boolean editar, crear;
     private ProyectoFacadeLocal proyectoFacadeLocal;
 
     @Override
@@ -96,7 +96,8 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         }
 
         if (intent.getExtras() != null && intent.getExtras().getBoolean("crear")) {
-            habilitar(intent.getExtras().getBoolean("crear"));
+            crear=intent.getExtras().getBoolean("crear");
+            habilitar(crear);
             btnRealizarCalculos.setText("Crear Proyecto");
         }
 
@@ -129,6 +130,7 @@ public class CrearProyectoActivity extends AppCompatActivity implements View.OnC
         proyectoNuevo.setDireccion(txtEDireccion.getText().toString());
         intentUsuarios.putExtra("proyecto", proyectoNuevo);
         intentUsuarios.putExtra("editar", editar);
+        intentUsuarios.putExtra("crear", crear);
         startActivity(intentUsuarios);
     }
 

@@ -28,7 +28,7 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
     private EditText txtECorreo;
     private EditText txtEDireccion;
     private EditText txtETelefono;
-    private boolean editar;
+    private boolean editar, crear;
     private Proyecto proyecto;
     private Usuario usuario;
     private UsuarioFacadeLocal usuarioFacadeLocal;
@@ -62,6 +62,9 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
         if(intent.getExtras() != null && intent.getExtras().getBoolean("editar")){
             editar=true;
         }
+        if(intent.getExtras() != null && intent.getExtras().getBoolean("crear")){
+            crear=true;
+        }
         setToolbar();
     }
 
@@ -80,6 +83,7 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
         Intent intent= new Intent(this,UsuariosActivity.class);
         intent.putExtra("proyecto",proyecto);
         intent.putExtra("editar",editar);
+        intent.putExtra("crear",crear);
         startActivity(intent);
     }
 
@@ -102,6 +106,7 @@ public class CrearUsuarioActivity extends AppCompatActivity implements View.OnCl
             Intent intent = new Intent(this, UsuariosActivity.class);
             intent.putExtra("proyecto",proyecto);
             intent.putExtra("editar",editar);
+            intent.putExtra("crear",crear);
             startActivity(intent);
         } catch (SQLException e) {
             Toast.makeText(this, "error al crear el usuario", Toast.LENGTH_SHORT).show();
