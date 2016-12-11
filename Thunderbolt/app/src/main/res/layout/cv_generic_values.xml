@@ -5,10 +5,10 @@
     android:id="@+id/cvGenericValues"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="3dp"
+    android:layout_marginLeft="7dp"
+    android:layout_marginRight="7dp"
     android:padding="3dp"
-    android:layout_marginBottom="5dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
     card_view:cardCornerRadius="30dp"
     card_view:cardElevation="30dp">
 
@@ -45,7 +45,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Descripcion del Enum"
             android:inputType="textMultiLine"
-            android:ems="14"
+            android:ems="16"
             android:id="@+id/textViewDescripcionEnum" />
 
 
@@ -55,29 +55,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="0.02">
+        android:layout_weight="0.02"
+        android:layout_gravity="center"
+        android:gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/grisOscuro"
+        <ImageView
+            android:id="@+id/imgVEstatus"
+            android:layout_marginTop="-2dp"
+            app:srcCompat="@mipmap/ic_elegir"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:textSize="14dp"
-            android:text="Valor: "
-            android:textStyle="bold"
-            android:id="@+id/textViewVE"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textSize="18dp"
-            android:layout_gravity="center"
-            android:textColor="@color/verde"
-            android:textStyle="bold"
-            android:id="@+id/textViewValorEnum" />
+            android:foregroundGravity="center"/>
 
 
     </LinearLayout>

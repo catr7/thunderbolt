@@ -14,13 +14,11 @@ public class ViewHolderGenericValues extends RecyclerView.ViewHolder implements 
 
     private ItemClickListener clickListener;
     CardView cv;
-    TextView valorEnum;
     TextView descripcionEnum;
 
     public ViewHolderGenericValues(View itemView) {
         super(itemView);
         cv = (CardView) itemView.findViewById(R.id.cvGenericValues);
-        valorEnum= (TextView) itemView.findViewById(R.id.textViewValorEnum);
         descripcionEnum =(TextView) itemView.findViewById(R.id.textViewDescripcionEnum);
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);

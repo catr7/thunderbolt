@@ -9,6 +9,19 @@
 
     <include layout="@layout/toolbar"/>
 
+    <TextView
+        android:id="@+id/txtVTituloEnum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="Situación Relativa del Edificio o Estructura en Evaluación"
+        android:textColor="@color/verde"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listaValoresGenericos"
         android:layout_width="match_parent"

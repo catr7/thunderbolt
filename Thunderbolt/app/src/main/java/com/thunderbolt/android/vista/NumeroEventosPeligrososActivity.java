@@ -20,7 +20,9 @@ import android.widget.Toast;
 
 import com.base.android.ContextProvider;
 import com.db.android.constantes.Ambiente;
+import com.db.android.constantes.EnrutamientoDeAcometida;
 import com.db.android.constantes.EstructuraEnEvaluacion;
+import com.db.android.constantes.TransformadorEnAcometida;
 import com.db.android.facade.DimensionFacade;
 import com.db.android.facade.DimensionFacadeLocal;
 import com.db.android.facade.NumeroEventosPeligrososFacade;
@@ -45,10 +47,10 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
     private String calculo;
     private Dialog customDialog;
     private EditText largo,ancho,alto;
-    private TextView varlosAnchoS1,varlosAltoS1,valorLargoS1,estructuraEnEvaluacionDescripcion,estructuraEnEvaluacionValor,varlosAnchoS2,valorLargoS2;
-    private ImageButton imgBEnumS1,imgBDimensionS1;;
-    private ImageView imgVEstatusS1,imgVEstatusS2,imageViewArrowS1,imageViewArrowS2;
-    private LinearLayout linearDimensionesS1,expandibleS1,expandibleS2,linearLayoutS1,linearLayoutS2,linearLayoutS3,linearLayoutS4,linearEstructuraEnEvaluacion;
+    private TextView varlosAnchoS1,varlosAltoS1,valorLargoS1,estructuraEnEvaluacionDescripcion,varlosAnchoS2,valorLargoS2;
+    private ImageButton imgBEnumS1,imgBDimensionS1,imgBEnumS3Ambiente,imgBEnumS3Enrutamiento,imgBEnumS3Transformador;
+    private ImageView imgVEstatusS1,imgVEstatusS2,imageViewArrowS1,imageViewArrowS2,imageViewArrowS3,imageViewArrowS4;
+    private LinearLayout linearDimensionesS1,expandibleS1,expandibleS2,expandibleS3,expandibleS4,linearLayoutS1,linearLayoutS2,linearLayoutS3,linearLayoutS4,linearEstructuraEnEvaluacion,linearAmbiente,linearTransformador,linearEnrutamiento ;
     private Button btnCalcularS1,btnCalcularS2,btnCalcularS3,btnCalcularS4;
     private ProyectoFacadeLocal proyectoFacadeLocal;
     private DimensionFacadeLocal dimensionFacadeLocal;
@@ -115,12 +117,13 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
                 break;
             case R.id.imgBEnumS1:
                 reinicarCalculoS1yS2(false);
-                listaDeEnum(EstructuraEnEvaluacion.mapValuesEnum(), EnumAdapter.enumKeysValues(EstructuraEnEvaluacion.values()), "EstructuraEnEvaluacion", this.getClass());
+                listaDeEnum(EstructuraEnEvaluacion.mapValuesEnum(), EnumAdapter.enumKeysValues(EstructuraEnEvaluacion.values()), "EstructuraEnEvaluacion", this.getClass(),"Situación Relativa del Edificio o Estructura en Evaluación","s1");
                 break;
             case R.id.btnCalcularS1:
                 if (proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura().getAncho() != null && proyecto.getNumeroEventosPeligorsos().getEstructuraEnEvaluacion()!=null) {
                    proyecto.getNumeroEventosPeligorsos().setCalculo_np(Calculos.nd(proyecto));
-                    btnCalcularS1.setText( proyecto.getNumeroEventosPeligorsos().getCalculo_np().toString());
+                    guardarProyecto();
+                    btnCalcularS1.setText(new StringBuilder().append("Np= ").append(proyecto.getNumeroEventosPeligorsos().getCalculo_np().toString()));
                     btnCalcularS1.setEnabled(false);
                     imgVEstatusS1.setImageResource(R.mipmap.estatus_completo);
                 } else {
@@ -134,7 +137,8 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
             case R.id.btnCalcularS2:
                 if (proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura().getAncho() != null) {
                     proyecto.getNumeroEventosPeligorsos().setCalculo_nm(Calculos.nm(proyecto));
-                    btnCalcularS2.setText( proyecto.getNumeroEventosPeligorsos().getCalculo_nm().toString());
+                    guardarProyecto();
+                    btnCalcularS2.setText(new StringBuilder().append("Nm= ").append(proyecto.getNumeroEventosPeligorsos().getCalculo_nm().toString()));
                     btnCalcularS2.setEnabled(false);
                     imgVEstatusS2.setImageResource(R.mipmap.estatus_completo);
                 } else {
@@ -142,7 +146,21 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
 
                 }
                 break;
-
+            case R.id.expandible_s3:
+                toggle_s3();
+                break;
+            case R.id.imgBEnumS3Ambiente:
+              //  reinicarCalculoS1yS2(false);
+                listaDeEnum(Ambiente.mapValuesEnum(), EnumAdapter.enumKeysValues(Ambiente.values()), "Ambiente", this.getClass(),"Ambiente","s3");
+                break;
+            case R.id.imgBEnumS3Enrutamiento:
+               // reinicarCalculoS1yS2(false);
+                listaDeEnum(EnrutamientoDeAcometida.mapValuesEnum(), EnumAdapter.enumKeysValues(EnrutamientoDeAcometida.values()), "EnrutamientoDeAcometida", this.getClass(),"Enrutamiento de Acometida","s3");
+                break;
+            case R.id.imgBEnumS3Transformador:
+              //  reinicarCalculoS1yS2(false);
+                listaDeEnum(TransformadorEnAcometida.mapValuesEnum(), EnumAdapter.enumKeysValues(TransformadorEnAcometida.values()), "TransformadorEnAcometida", this.getClass(),"Transformador en Acometida","s3");
+                break;
         }
     }
 
@@ -152,6 +170,8 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
 
         linearLayoutS2.setVisibility(View.GONE);
         imageViewArrowS2.setImageResource(R.mipmap.flecha_abajo);
+        linearLayoutS3.setVisibility(View.GONE);
+        imageViewArrowS3.setImageResource(R.mipmap.flecha_abajo);
     }
 
     public void toggle_s2() {
@@ -160,6 +180,18 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
 
         linearLayoutS1.setVisibility(View.GONE);
         imageViewArrowS1.setImageResource(R.mipmap.flecha_abajo);
+        linearLayoutS3.setVisibility(View.GONE);
+        imageViewArrowS3.setImageResource(R.mipmap.flecha_abajo);
+    }
+
+    public void toggle_s3() {
+        linearLayoutS3.setVisibility(linearLayoutS3.isShown() ? View.GONE : View.VISIBLE);
+        imageViewArrowS3.setImageResource(linearLayoutS3.isShown() ? R.mipmap.flecha_arriba : R.mipmap.flecha_abajo);
+
+        linearLayoutS1.setVisibility(View.GONE);
+        imageViewArrowS1.setImageResource(R.mipmap.flecha_abajo);
+        linearLayoutS2.setVisibility(View.GONE);
+        imageViewArrowS2.setImageResource(R.mipmap.flecha_abajo);
 
     }
 
@@ -175,6 +207,11 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
         largo = (EditText) customDialog.findViewById(R.id.largo);
         ancho = (EditText) customDialog.findViewById(R.id.ancho);
         alto = (EditText) customDialog.findViewById(R.id.alto);
+        if(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura()!=null &&proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura().getAncho()!=null){
+            largo.setText(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura().getLargo().toString());
+            ancho.setText(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura().getAncho().toString());
+            alto.setText(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura().getAlto().toString());
+        }
         ((Button) customDialog.findViewById(R.id.aceptarDimensiones)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -183,11 +220,7 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
                     proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura().setAlto(Float.valueOf(alto.getText().toString()));
                     proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura().setAncho(Float.valueOf(ancho.getText().toString()));
                     proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura().setLargo(Float.valueOf(largo.getText().toString()));
-                    try {
-                        proyectoFacadeLocal.crear(proyecto);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                    guardarProyecto();
                     cargarDimensiones();
                     linearDimensionesS1.setVisibility(View.VISIBLE);
                     customDialog.dismiss();
@@ -213,19 +246,20 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
     public void cargarEstructuraEnEvaluacion() {
         if (proyecto.getNumeroEventosPeligorsos().getEstructuraEnEvaluacion() != null) {
             estructuraEnEvaluacionDescripcion.setText(proyecto.getNumeroEventosPeligorsos().getEstructuraEnEvaluacion().getdescripcion());
-            estructuraEnEvaluacionValor.setText(proyecto.getNumeroEventosPeligorsos().getEstructuraEnEvaluacion().getValor().toString());
             linearEstructuraEnEvaluacion.setVisibility(View.VISIBLE);
         }
 
     }
 
-    public void listaDeEnum(Map<String, String[]> map, List<String> list, String c, Class a) {
+    public void listaDeEnum(Map<String, String[]> map, List<String> list, String c, Class a, String titulo,String calculo) {
         Intent intentEnums = new Intent(this, ListaDeEnums.class);
         intentEnums.putExtra("proyecto", proyecto);
+        intentEnums.putExtra("titulo",titulo);
         intentEnums.putExtra("enumSeleccionado", (Serializable) map);
         intentEnums.putExtra("titulosEnum", (Serializable) list);
         intentEnums.putExtra("clase", c);
         intentEnums.putExtra("actividad", (Serializable) a);
+        intentEnums.putExtra("calculo", calculo);
         startActivity(intentEnums);
     }
 
@@ -235,7 +269,12 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
                 case "s1":
                     linearLayoutS1.setVisibility(View.VISIBLE);
                     break;
-
+                case "s2":
+                    linearLayoutS2.setVisibility(View.VISIBLE);
+                    break;
+                case "s3":
+                    linearLayoutS3.setVisibility(View.VISIBLE);
+                    break;
             }
         }
     }
@@ -243,13 +282,13 @@ public class NumeroEventosPeligrososActivity extends AppCompatActivity implement
     public void cargarEstatus(){
         if(proyecto.getNumeroEventosPeligorsos().getCalculo_np()!=null){
             imgVEstatusS1.setImageResource(R.mipmap.estatus_completo);
-            btnCalcularS1.setText( proyecto.getNumeroEventosPeligorsos().getCalculo_np().toString());
+            btnCalcularS1.setText(new StringBuilder().append("Np= ").append(proyecto.getNumeroEventosPeligorsos().getCalculo_np().toString()));
             btnCalcularS1.setEnabled(false);
         }
 
         if(proyecto.getNumeroEventosPeligorsos().getCalculo_nm()!=null){
             imgVEstatusS2.setImageResource(R.mipmap.estatus_completo);
-            btnCalcularS2.setText( proyecto.getNumeroEventosPeligorsos().getCalculo_nm().toString());
+            btnCalcularS2.setText(new StringBuilder().append("Nm= ").append(proyecto.getNumeroEventosPeligorsos().getCalculo_nm().toString()));
             btnCalcularS2.setEnabled(false);
         }
 
@@ -265,6 +304,7 @@ public void reinicarCalculoS1yS2(boolean dimension) {
         proyecto.getNumeroEventosPeligorsos().setCalculo_nm(null);
     }
     proyecto.getNumeroEventosPeligorsos().setCalculo_np(null);
+    guardarProyecto();
 }
 
     public void instanciar() {
@@ -273,10 +313,11 @@ public void reinicarCalculoS1yS2(boolean dimension) {
         numeroEventosPeligrososFacadeLocal = new NumeroEventosPeligrososFacade();
         expandibleS1 = (LinearLayout) findViewById(R.id.expandible_s1);
         expandibleS2 = (LinearLayout) findViewById(R.id.expandible_s2);
+        expandibleS3 = (LinearLayout) findViewById(R.id.expandible_s3);
         linearLayoutS1 = (LinearLayout) findViewById(R.id.toogleS1);
         linearLayoutS2 = (LinearLayout) findViewById(R.id.toogleS2);
-        /*linearLayoutS1= (LinearLayout) findViewById(R.id.toogleS3);
-        linearLayoutS1= (LinearLayout) findViewById(R.id.toogleS4);*/
+        linearLayoutS3= (LinearLayout) findViewById(R.id.toogleS3);
+//        linearLayoutS1= (LinearLayout) findViewById(R.id.toogleS4);
         imgBDimensionS1 = (ImageButton) findViewById(R.id.imgBDimensionEstructura);
         varlosAltoS1 = (TextView) findViewById(R.id.ValorAltoS1);
         varlosAnchoS1 = (TextView) findViewById(R.id.ValorAnchoS1);
@@ -284,18 +325,24 @@ public void reinicarCalculoS1yS2(boolean dimension) {
         varlosAnchoS2 = (TextView) findViewById(R.id.ValorAnchoS2);
         valorLargoS2 = (TextView) findViewById(R.id.ValorLargoS2);
         imgBEnumS1 = (ImageButton) findViewById(R.id.imgBEnumS1);
+        imgBEnumS3Ambiente= (ImageButton) findViewById(R.id.imgBEnumS3Ambiente);
+        imgBEnumS3Enrutamiento= (ImageButton) findViewById(R.id.imgBEnumS3Enrutamiento);
+        imgBEnumS3Transformador= (ImageButton) findViewById(R.id.imgBEnumS3Transformador);
         imageViewArrowS1 = (ImageView) findViewById(R.id.imageViewArrowS1);
         imageViewArrowS2 = (ImageView) findViewById(R.id.imageViewArrowS2);
+        imageViewArrowS3 = (ImageView) findViewById(R.id.imageViewArrowS3);
+        imageViewArrowS4 = (ImageView) findViewById(R.id.imageViewArrowS4);
         imgVEstatusS1= (ImageView) findViewById(R.id.imgVEstatusS1);
         imgVEstatusS2= (ImageView) findViewById(R.id.imgVEstatusS2);
         linearDimensionesS1 = (LinearLayout) findViewById(R.id.linearDimensionesS1);
         linearEstructuraEnEvaluacion = (LinearLayout) findViewById(R.id.linearEstructuraEnEvaluacion);
+        linearAmbiente= (LinearLayout) findViewById(R.id.linearAmbiente);
+        linearEnrutamiento= (LinearLayout) findViewById(R.id.linearEnrutamiento);
+        linearTransformador= (LinearLayout) findViewById(R.id.linearTransformador);
         estructuraEnEvaluacionDescripcion = (TextView) findViewById(R.id.estructuraEnEvaluacionDescripcion);
-        estructuraEnEvaluacionValor = (TextView) findViewById(R.id.estructuraEnEvaluacionValor);
         btnCalcularS1 = (Button) findViewById(R.id.btnCalcularS1);
         btnCalcularS2 = (Button) findViewById(R.id.btnCalcularS2);
-        linearEstructuraEnEvaluacion.setVisibility(View.GONE);
-        linearDimensionesS1.setVisibility(View.GONE);
+
     }
 
     public void inicializar(){
@@ -304,9 +351,27 @@ public void reinicarCalculoS1yS2(boolean dimension) {
         imgBDimensionS1.setOnClickListener(this);
         expandibleS1.setOnClickListener(this);
         expandibleS2.setOnClickListener(this);
+        expandibleS3.setOnClickListener(this);
         imgBEnumS1.setOnClickListener(this);
+        imgBEnumS3Ambiente.setOnClickListener(this);
+        imgBEnumS3Enrutamiento.setOnClickListener(this);
+        imgBEnumS3Transformador.setOnClickListener(this);
+        linearEstructuraEnEvaluacion.setVisibility(View.GONE);
+        linearDimensionesS1.setVisibility(View.GONE);
         linearLayoutS1.setVisibility(View.GONE);
         linearLayoutS2.setVisibility(View.GONE);
+        linearLayoutS3.setVisibility(View.GONE);
+        linearAmbiente.setVisibility(View.GONE);
+        linearTransformador.setVisibility(View.GONE);
+        linearEnrutamiento.setVisibility(View.GONE);
+    }
+
+    public void guardarProyecto(){
+        try {
+            proyectoFacadeLocal.crear(proyecto);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 

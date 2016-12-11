@@ -30,4 +30,13 @@ public class Calculos {
     public static Double nm(Proyecto proyecto){
         return ng((double) proyecto.getEstado().getValor())*am(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura())*Math.pow(10,-6);
     }
+
+    public static Double al(Double l){
+        return 40*l;
+    }
+
+   public static Double nl(Proyecto proyecto){
+       return ng((double) proyecto.getEstado().getValor());
+   }
 }
+

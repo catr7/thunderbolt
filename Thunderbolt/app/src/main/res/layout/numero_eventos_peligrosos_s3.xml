@@ -1,6 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/toogleS3"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:padding="8dp"
+            android:text="Longitud de la Estructura:"
+            android:textColor="@color/grisOscuro"
+            android:textSize="14dp"
+            android:textStyle="normal|bold"
+            android:gravity="left"
+            android:layout_weight="0.05"
+            android:minWidth="100dp" />
+
+        <EditText
+            android:windowSoftInputMode="stateHidden"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/ancho"
+            android:textSize="16dp"
+            android:layout_weight="0.2"
+            android:layout_width="100dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="m "
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:layout_margin="3dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:weightSum="1"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:padding="8dp"
+            android:text="Ambiente"
+            android:inputType="textMultiLine"
+            android:ems="14"
+            android:textColor="@color/grisOscuro"
+            android:textSize="14dp"
+            android:textStyle="normal|bold"
+            android:gravity="left"
+            android:layout_weight="0.9" />
+
+        <ImageButton
+            android:id="@+id/imgBEnumS3Ambiente"
+            android:layout_gravity="start"
+            android:background="#ffffff"
+            android:src="@mipmap/ic_buscar"
+            android:layout_weight="0.02"
+            android:layout_width="30dp"
+            android:layout_height="31dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearAmbiente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:id="@+id/ambienteDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:text="La estructura está rodeada por estructuras más altas o por arboles"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:textColor="@color/grisOscuro"
+            android:textSize="14dp"
+            android:textStyle="normal"
+            android:gravity="left"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="0.9"
+            android:paddingTop="6dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:weightSum="1"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:padding="8dp"
+            android:text="Enrutamiento de Acometida: "
+            android:inputType="textMultiLine"
+            android:ems="14"
+            android:textColor="@color/grisOscuro"
+            android:textSize="14dp"
+            android:textStyle="normal|bold"
+            android:gravity="left"
+            android:layout_weight="0.9" />
+
+        <ImageButton
+            android:id="@+id/imgBEnumS3Enrutamiento"
+            android:layout_gravity="start"
+            android:background="#ffffff"
+            android:src="@mipmap/ic_buscar"
+            android:layout_weight="0.02"
+            android:layout_width="30dp"
+            android:layout_height="31dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearEnrutamiento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:id="@+id/EnrutamientoDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:text="La estructura está rodeada por estructuras más altas o por arboles"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:textColor="@color/grisOscuro"
+            android:textSize="14dp"
+            android:textStyle="normal"
+            android:gravity="left"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="0.9"
+            android:paddingTop="6dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:weightSum="1"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:padding="8dp"
+            android:text="Transformador en Acometida"
+            android:inputType="textMultiLine"
+            android:ems="14"
+            android:textColor="@color/grisOscuro"
+            android:textSize="14dp"
+            android:textStyle="normal|bold"
+            android:gravity="left"
+            android:layout_weight="0.9" />
+
+        <ImageButton
+            android:id="@+id/imgBEnumS3Transformador"
+            android:layout_gravity="start"
+            android:background="#ffffff"
+            android:src="@mipmap/ic_buscar"
+            android:layout_weight="0.02"
+            android:layout_width="30dp"
+            android:layout_height="31dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearTransformador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:id="@+id/TransformadorDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:text="La estructura está rodeada por estructuras más altas o por arboles"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:textColor="@color/grisOscuro"
+            android:textSize="14dp"
+            android:textStyle="normal"
+            android:gravity="left"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="0.9"
+            android:paddingTop="6dp" />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnCalcularS3"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/boton_crear"
+        android:text="Cálcular"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 
 </LinearLayout>

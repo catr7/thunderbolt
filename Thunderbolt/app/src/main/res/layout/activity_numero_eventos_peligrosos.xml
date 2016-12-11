@@ -191,8 +191,10 @@
                 android:layout_height="match_parent"
                 android:background="@color/windowBackground"
                 android:clickable="true"
-                android:orientation="vertical">
-                <!--android:onClick="toggle_S3"-->
+                android:orientation="vertical"
+                android:onClick="toggle_S3"
+                android:id="@+id/expandible_s3">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -215,6 +217,7 @@
                         android:textStyle="normal|bold" />
 
                     <ImageView
+                        android:id="@+id/imageViewArrowS3"
                         android:layout_width="30dp"
                         android:layout_height="25dp"
                         android:layout_gravity="center"
@@ -247,6 +250,7 @@
                 </LinearLayout>
 
             </LinearLayout>
+            <include layout="@layout/numero_eventos_peligrosos_s3" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -269,7 +273,8 @@
                 android:layout_height="match_parent"
                 android:background="@color/windowBackground"
                 android:clickable="true"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/expandible_s4">
                 <!--android:onClick="toggle_S4"-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -292,6 +297,7 @@
                         android:textStyle="normal|bold" />
 
                     <ImageView
+                        android:id="@+id/imageViewArrowS4"
                         android:layout_width="30dp"
                         android:layout_height="25dp"
                         android:layout_gravity="center"

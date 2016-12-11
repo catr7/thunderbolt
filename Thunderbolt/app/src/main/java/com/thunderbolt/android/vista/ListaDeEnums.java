@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.db.android.constantes.Ambiente;
 import com.db.android.model.Proyecto;
@@ -28,14 +29,23 @@ public class ListaDeEnums extends AppCompatActivity {
     private Map<String, String[]> enumSeleccionado = new HashMap<>();
     private List<String> titulosEnum = new ArrayList<>();
     private Proyecto proyecto;
-    private String c;
+    private TextView txtVTituloEnum;
+    private String c, calculo;
     private Class a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generic_values);
         setToolbar();
+        txtVTituloEnum= (TextView) findViewById(R.id.txtVTituloEnum);
+
         Intent intent = getIntent();
+        if(intent.getExtras() != null && intent.getExtras().getString("titulo") != null){
+            txtVTituloEnum.setText(intent.getExtras().getString("titulo"));
+        }
+        if(intent.getExtras() != null && intent.getExtras().getString("calculo") != null){
+           calculo= intent.getExtras().getString("calculo");
+        }
         if (intent.getExtras() != null && intent.getExtras().getSerializable("proyecto") != null) {
             proyecto=(Proyecto) intent.getExtras().getSerializable("proyecto");
         }
@@ -54,16 +64,26 @@ public class ListaDeEnums extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.listaValoresGenericos);
         manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
-        RecyclerViewAdapterGenericValues adaptador = new RecyclerViewAdapterGenericValues(enumSeleccionado, titulosEnum,proyecto,c,a);
+        RecyclerViewAdapterGenericValues adaptador = new RecyclerViewAdapterGenericValues(enumSeleccionado, titulosEnum,proyecto,c,a,calculo);
         recyclerView.setAdapter(adaptador);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent= new Intent(this,a);
+        intent.putExtra("proyecto",proyecto);
+        intent.putExtra("calculo",calculo);
+        startActivity(intent);
+    }
+
 
     private void setToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            // Poner ícono del drawer toggle
+            ab.setTitle("Seleccione");
             ab.setHomeAsUpIndicator(R.drawable.icono_atras);
             ab.setDisplayHomeAsUpEnabled(true);
         }

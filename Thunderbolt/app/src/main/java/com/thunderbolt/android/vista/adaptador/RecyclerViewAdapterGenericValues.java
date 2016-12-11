@@ -35,13 +35,14 @@ public class RecyclerViewAdapterGenericValues extends RecyclerView.Adapter<ViewH
     private ProyectoFacadeLocal proyectoFacadeLocal;
 
 
-    public RecyclerViewAdapterGenericValues(Map<String, String[]> enumSeleccionado, List<String> titulosEnum,Proyecto proyecto, String c, Class a) {
+    public RecyclerViewAdapterGenericValues(Map<String, String[]> enumSeleccionado, List<String> titulosEnum,Proyecto proyecto, String c, Class a,String calculo) {
         this.enumSeleccionado = enumSeleccionado;
         this.titulosEnum = titulosEnum;
         this.proyecto= proyecto;
         this.c=c;
         this.a=a;
         this.proyectoFacadeLocal= new ProyectoFacade();
+        this.calculo=calculo;
     }
 
     @Override
@@ -54,7 +55,6 @@ public class RecyclerViewAdapterGenericValues extends RecyclerView.Adapter<ViewH
     @Override
     public void onBindViewHolder(ViewHolderGenericValues holder, int position) {
         holder.descripcionEnum.setText(this.enumSeleccionado.get(this.titulosEnum.get(position))[0]);
-        holder.valorEnum.setText(this.enumSeleccionado.get(this.titulosEnum.get(position))[1]);
         holder.setClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
@@ -91,7 +91,6 @@ public class RecyclerViewAdapterGenericValues extends RecyclerView.Adapter<ViewH
         switch (c){
             case "EstructuraEnEvaluacion":
                 proyecto.getNumeroEventosPeligorsos().setEstructuraEnEvaluacion(EstructuraEnEvaluacion.valueOf(name));
-                calculo="s1";
         }
     }
 }
