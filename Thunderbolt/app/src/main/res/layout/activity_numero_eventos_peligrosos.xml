@@ -274,8 +274,9 @@
                 android:background="@color/windowBackground"
                 android:clickable="true"
                 android:orientation="vertical"
+                android:onClick="toggle_S4"
                 android:id="@+id/expandible_s4">
-                <!--android:onClick="toggle_S4"-->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -330,21 +331,7 @@
                 </LinearLayout>
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@color/windowBackground"
-                android:orientation="vertical">
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@color/verde" />
-            </LinearLayout>
+            <include layout="@layout/numero_eventos_peligrosos_s4" />
             //linear S4
             //fin de la pantalla
         </LinearLayout>

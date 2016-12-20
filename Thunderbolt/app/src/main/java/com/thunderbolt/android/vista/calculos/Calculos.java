@@ -19,24 +19,32 @@ public class Calculos {
         return  0.1*valor;
     }
 
-    public static Double nd(Proyecto proyecto){
+    public static Double s1Nd(Proyecto proyecto){
         return ng((double) proyecto.getEstado().getValor())*s1AD(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura())*proyecto.getNumeroEventosPeligorsos().getEstructuraEnEvaluacion().getValor()* Math.pow(10, -6);
     }
 
-    public static Double am(DimensionesEstructura dimension){
+    public static Double s2Am(DimensionesEstructura dimension){
         return (dimension.getLargo()*dimension.getAncho())+2*(500*dimension.getLargo())*3.1416*Math.pow(500,2);
     }
 
-    public static Double nm(Proyecto proyecto){
-        return ng((double) proyecto.getEstado().getValor())*am(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura())*Math.pow(10,-6);
+    public static Double S2Nm(Proyecto proyecto){
+        return ng((double) proyecto.getEstado().getValor())*s2Am(proyecto.getNumeroEventosPeligorsos().getDimensionesEstructura())*Math.pow(10,-6);
     }
 
-    public static Double al(Double l){
+    public static Double s3Al(Double l){
         return 40*l;
     }
 
-   public static Double nl(Proyecto proyecto){
-       return ng((double) proyecto.getEstado().getValor());
+   public static Double s3Nl(Proyecto proyecto){
+       return ng((double) proyecto.getEstado().getValor())*s3Al(Double.valueOf(proyecto.getNumeroEventosPeligorsos().getLongitud_de_la_acometida()))*proyecto.getNumeroEventosPeligorsos().getAmbiente().getValor()*proyecto.getNumeroEventosPeligorsos().getEnrutamientoDeAcometida().getValor()*proyecto.getNumeroEventosPeligorsos().getTransformadorEnAcometida().getValor()*Math.pow(10,-6) ;
    }
+
+    public static Double s4Al(Double l){
+        return 4000*l;
+    }
+
+    public static Double s4Ni(Proyecto proyecto){
+        return ng((double) proyecto.getEstado().getValor())*s4Al(Double.valueOf(proyecto.getNumeroEventosPeligorsos().getLongitud_de_la_acometida()))*proyecto.getNumeroEventosPeligorsos().getAmbiente().getValor()*proyecto.getNumeroEventosPeligorsos().getEnrutamientoDeAcometida().getValor()*proyecto.getNumeroEventosPeligorsos().getTransformadorEnAcometida().getValor()*Math.pow(10,-6);
+    }
 }
 

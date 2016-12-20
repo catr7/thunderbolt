@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/ancho"
+            android:id="@+id/longitudS3"
             android:textSize="16dp"
             android:layout_weight="0.2"
             android:layout_width="100dp" />
@@ -208,7 +208,7 @@
         android:layout_marginLeft="8dp">
 
         <TextView
-            android:id="@+id/TransformadorDescripcion"
+            android:id="@+id/transformadorDescripcion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"

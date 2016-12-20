@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.base.android.ContextProvider;
+import com.db.android.constantes.Ambiente;
+import com.db.android.constantes.EnrutamientoDeAcometida;
 import com.db.android.constantes.EstructuraEnEvaluacion;
+import com.db.android.constantes.TransformadorEnAcometida;
 import com.db.android.facade.ProyectoFacade;
 import com.db.android.facade.ProyectoFacadeLocal;
 import com.db.android.model.Proyecto;
@@ -91,6 +94,16 @@ public class RecyclerViewAdapterGenericValues extends RecyclerView.Adapter<ViewH
         switch (c){
             case "EstructuraEnEvaluacion":
                 proyecto.getNumeroEventosPeligorsos().setEstructuraEnEvaluacion(EstructuraEnEvaluacion.valueOf(name));
+                break;
+            case "Ambiente":
+                proyecto.getNumeroEventosPeligorsos().setAmbiente(Ambiente.valueOf(name));
+                break;
+            case "EnrutamientoDeAcometida":
+                proyecto.getNumeroEventosPeligorsos().setEnrutamientoDeAcometida(EnrutamientoDeAcometida.valueOf(name));
+                break;
+            case "TransformadorEnAcometida":
+                proyecto.getNumeroEventosPeligorsos().setTransformadorEnAcometida(TransformadorEnAcometida.valueOf(name));
+                break;
         }
     }
 }
